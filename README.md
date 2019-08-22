@@ -15,4 +15,4 @@ The website for searching records on the Korean Masters Championships with HTML,
 ## Credits
 ## License-->
 ## Authors
-Jiyun Lee, Seoyun Baek
+Jiyun Lee, Seoyoon Baek
