@@ -1,0 +1,785 @@
+body {
+  padding-top: 3.5rem;
+}
+
+.navbar {
+  line-height: normal;
+  padding: 0rem !important;
+}
+
+.navbar div.container {
+  line-height: 1.5;
+}
+
+.navbar .navbar-collapse {
+  line-height: 2;
+}
+
+.navbar-brand {
+  padding: 0rem;
+}
+
+.nav-item.active {
+  border-bottom: 0.15rem solid #00a3d2;
+}
+
+.nav-item.active a {
+  color: #00a3d2 !important;
+  font-weight: bold;
+}
+
+.modal-container {
+  width: 100%;
+  position: relative;
+}
+
+.modal-content {
+  border: 1px solid #bcbcbc;
+  border-top: 0;
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+#searchForm_tools {
+  width: 100%;
+  overflow-x: hidden;
+  height: auto;
+}
+
+#mobile_tools_list {
+  color: rgba(255,255,255,0.5);
+  border: 1px solid #6c757d;
+  background-color: #495057;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 2.5rem;
+  z-index: 1029;
+}
+
+#mobile_tools_list .mobile_tool {
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
+  border-right: 0.5px solid rgba(0,0,0,0.9);
+  text-align: center;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+#mobile_tools_list .mobile_tool:last-child {
+  border-right: 0rem;
+}
+
+#mobile_tools_list .mobile_tool:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+#mobile_tools_list .mobile_tool.active {
+  color: #fff;
+  text-decoration: none;
+}
+
+#searchForm_state_badge {
+  display: none;
+  float: left;
+}
+
+#searchForm_state_badge .badge-pill {
+  padding-right: 2rem !important;
+  padding-left: 2rem !important;
+}
+
+#searchForm_state_badge .badge {
+  padding: 0.6rem !important;
+  font-size: 100% !important;
+  display: none;
+}
+
+#searchForm_state_badge .current_search_state {
+  display: inline-block !important;
+}
+
+#searchConditions_bar {
+  text-align: left;
+  float: left;
+}
+
+#searchConditions_bar span {
+  padding: 0.6rem !important;
+  font-size: 100% !important;
+  margin-right: 1rem;
+}
+
+#searchConditions_bar_content {
+  display: inline-block;
+}
+
+#searchConditions_bar_content p {
+  display: inline-block;
+  margin-right: 1rem;
+  color: #6c757d !important;
+}
+
+#searchForm_tools_button {
+  display: inline-block;
+  float: right;
+}
+
+#searchForm_tools_button .btn {
+  display: none;
+}
+
+.hide_researchwindow_btn {
+  display: none;
+}
+
+.show_researchwindow_btn {
+  display: none;
+}
+
+#searchForm {
+  display: none;
+  clear: both;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.selectbox {
+  position: relative;
+  width: 200px;
+  /* 너비설정 */
+  border: 1px solid #ced4da;
+  /* 테두리 설정 */
+  z-index: 1;
+  /* focus 효과*/
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  background-color: white;
+}
+
+/* focus 효과 */
+.selectbox.focus {
+  border-color: #66afe9;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+/* 가상 선택자를 활용 화살표 대체 */
+.selectbox:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  width: 0;
+  height: 0;
+  margin-top: -1px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #313131;
+}
+
+.selectbox label {
+  position: absolute;
+  top: 1px;
+  /* 위치정렬 */
+  left: 5px;
+  /* 위치정렬 */
+  padding: 0.3rem;
+  /* select의 여백 크기 만큼 */
+  color: #333;
+  z-index: -1;
+  /* IE8에서 label이 위치한 곳이 클릭되지 않는 것 해결 */
+  margin-bottom: 0rem;
+}
+
+.selectbox select {
+  width: 99%;
+  height: auto;
+  /* 높이 초기화 */
+  line-height: normal;
+  /* line-height 초기화 */
+  font-family: inherit;
+  /* 폰트 상속 */
+  padding: 0.4rem;
+  /* 여백과 높이 결정 */
+  border: 0;
+  opacity: 0;
+  /* 숨기기 */
+  filter: alpha(opacity=0);
+  /* IE8 숨기기 */
+  -webkit-appearance: none;
+  /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+  border-bottom: 1px solid black;
+}
+
+.selectbox.disabled {
+  background: #e9ecef;
+}
+
+#searchForm_player-sex.selectbox {
+  width: 100%;
+}
+
+#searchForm_age .custom-control-inline {
+  margin-right: 0 !important;
+}
+
+#searchForm_age .custom-checkbox {
+  width: 6rem;
+}
+
+#searchForm_year .selectbox_wrapper {
+  width: 47%;
+  min-width: 120px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+#searchForm_year .selectbox {
+  display: inline-block;
+  width: 70%;
+  min-width: 80px;
+  margin-right: 0rem !important;
+}
+
+.dropdown_items {
+  display: none;
+  background-color: #f6f6f6;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: scroll;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.dropdown_items span {
+  color: black;
+  padding: 0.2rem 0.3rem;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown_items span:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block !important;
+}
+
+.show_inline_block {
+  display: inline-block !important;
+}
+
+.dropdown_button {
+  border-radius: 0 0.2rem 0.2rem 0 !important;
+}
+
+.research_btn {
+  max-width: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main {
+  overflow-x: hidden;
+  margin-bottom: 20px;
+}
+
+#note_table_tools {
+  margin-left: 1rem;
+}
+
+.select_notes {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  height: 2.5rem;
+  font-size: 11pt;
+  border: 0.15rem solid #f2d68a;
+  border-radius: 5px;
+  padding: 4px 5px 0px 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+#note_table_tools .btn, #mobile_note_table_tools .btn {
+  background-color: #f2d68a;
+  border: 0.1rem solid #ffe496;
+  color: black;
+  display: none;
+}
+
+#mobile_note_table_tools .btn {
+  margin-top: 0.5rem;
+}
+
+.result_data_table_active .select_all_records {
+  display: inline-block !important;
+}
+
+.note_table_active .select_all_records {
+  display: inline-block !important;
+}
+
+.result_data_table_active .save_records_to_note {
+  display: inline-block !important;
+}
+
+.note_table_active .create_new_note {
+  display: inline-block !important;
+}
+
+.note_table_active .delete_note {
+  display: inline-block !important;
+}
+
+.note_table_active .delete_records {
+  display: inline-block !important;
+}
+
+#searchResult_sort_category, #mobile_searchResult_sort_category {
+  width: 7rem;
+  display: inline-block;
+}
+
+#searchResult_sort_order, #mobile_searchResult_sort_order {
+  width: 7rem;
+  display: inline-block;
+}
+
+#table_mode_tabs .nav-item {
+  cursor: pointer;
+}
+
+#table_mode_tabs .nav-link {
+  border-color: #e9ecef #e9ecef #dee2e6 !important;
+  font-size: 1rem;
+}
+
+#table_mode_tabs .nav-link:hover {
+  background-color: #bcbcbc !important;
+}
+
+#table_mode_tabs #result_data_table_mode .nav-link.active {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #28b0e0 !important;
+  color: white !important;
+}
+
+#table_mode_tabs #note_table_mode .nav-link.active {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #ffc952 !important;
+  color: white !important;
+}
+
+main table {
+  text-align: center;
+  display: none;
+}
+
+main table.active {
+  display: table !important;
+}
+
+main table thead th {
+  vertical-align: middle !important;
+  border-bottom: 0rem !important;
+  border-top: 0rem !important;
+}
+
+#result_data_table thead tr {
+  background-color: #28b0e0 !important;
+  color: white !important;
+}
+
+#note_table thead tr {
+  background-color: #ffc952 !important;
+  color: white !important;
+}
+
+.table_team {
+  max-width: 8rem;
+}
+
+.paginationWrapper {
+  display: block;
+}
+
+#table_wrapper.result_data_table_active #paginationWrapper_note {
+  display: none !important;
+}
+
+#table_wrapper.note_table_active #paginationWrapper_result {
+  display: none !important;
+}
+
+#mobile_tools_content {
+  display: none;
+}
+
+#snackbar {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1031;
+  bottom: 5rem;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 5rem; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 5rem; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 5rem; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 5rem; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+tr.data.checked {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+tr.data.saved {
+  background-color: #ffc952 !important;
+}
+
+option:disabled {
+  background-color: #ffc952;
+}
+
+@media only screen and (max-width: 992px) {
+  body {
+    padding-top: 5.2rem;
+  }
+
+  main table thead {
+    display: none;
+  }
+
+  .modal-container {
+    position: fixed;
+    z-index: 1028;
+    padding-top: 5rem;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  #searchForm_age .custom-checkbox:first-child {
+    font-size: 0.8rem;
+  }
+
+  #searchForm_age .custom-checkbox:last-child {
+    font-size: 0.8rem;
+  }
+
+  .hide_researchwindow_btn {
+    display: none !important;
+  }
+
+  .show_researchwindow_btn {
+    display: none !important;
+  }
+
+  main table tbody tr {
+    display: block;
+    border: 1px solid #dee2e6;
+    margin-bottom: 0.5rem;
+  }
+
+  main table td {
+    border-top: 0rem !important;
+  }
+
+  main table th {
+    border-top: 0rem !important;
+  }
+
+  .mobile_none {
+    display: none !important;
+  }
+
+  .mobile_show {
+    display: block !important;
+  }
+
+  .mobile_show_inline_block {
+    display: inline-block !important;
+  }
+
+  .mobile_body_overflow_hidden {
+    overflow: hidden !important;
+  }
+
+  .mobile_body_overflow_auto {
+    overflow: auto !important;
+  }
+
+  #mobile_tools_content {
+    display: block;
+  }
+
+  #mobile_tools_content .mobile_tool_item {
+    display: none;
+  }
+
+  #mobile_tools_content #mobile_note_table_tools.active {
+    display: block;
+  }
+
+  #mobile_tools_content #mobile_sort_tools.active {
+    display: block;
+  }
+
+  #mobile_tools_content #mobile_setting_tools.active {
+    display: flex;
+  }
+
+  #mobile_tools_content .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 2rem;
+    vertical-align: middle;
+  }
+
+  #mobile_tools_content .switch input {
+    display:none;
+  }
+
+  #mobile_tools_content .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  #mobile_tools_content .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  #mobile_tools_content input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  #mobile_tools_content input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  #mobile_tools_content input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  #mobile_tools_content .slider.round {
+    border-radius: 34px;
+  }
+
+  #mobile_tools_content .slider.round:before {
+    border-radius: 50%;
+  }
+
+  #mobile_tools_content p {
+  	margin:0px;
+  	display:inline-block;
+  	font-size:15px;
+  	font-weight:bold;
+  }
+
+  #mobile_note_table_tools .p_note_hide {
+    display: none;
+  }
+
+  #mobile_note_table_tools .p_note_open {
+    display: none;
+  }
+
+  #mobile_note_table_tools.result_data_table_active .p_note_hide {
+    display: inline-block;
+  }
+
+  #mobile_note_table_tools.note_table_active .p_note_open {
+    display: inline-block;
+  }
+
+  .mobile_table_pname {
+    display: inline-block;
+  }
+
+  .mobile_table_sex {
+    display: inline-block;
+  }
+
+  .mobile_table_age {
+    display: inline-block;
+  }
+
+  .mobile_table_style {
+    display: inline-block;
+  }
+
+  .mobile_table_distance {
+    display: inline-block;
+  }
+
+  .mobile_table_record {
+    display: inline-block;
+  }
+
+  .mobile_table_team {
+    display: none;
+  }
+
+  .mobile_table_competitionDate {
+    display: none;
+  }
+
+  .mobile_table_competition_name {
+    display: none;
+  }
+
+  .mobile_table_remark {
+    display: none;
+  }
+
+  tr.data td {
+    position: relative;
+    width: 100%;
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 16.66%;
+  }
+
+  .nav-item.active {
+    border-bottom: 0rem;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+}
+
+@media only screen and (max-width: 576px){
+  body {
+    padding-top: 6rem;
+  }
+
+  .modal-container {
+    padding-top: 6rem;
+  }
+
+  #mobile_tools_list .mobile_tool {
+    padding: 0.3rem !important;
+  }
+
+  #mobile_tools_list .mobile_tool span {
+    display: block;
+    font-size: 0.8rem;
+  }
+
+  tr.data td {
+    position: relative;
+    width: 100%;
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.33%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #mobile_tools_list .mobile_tool span {
+    font-size: 0.7rem;
+  }
+  /* 모바일에서는 hover 스타일이 좀 방해가 되는 경우가 많음.*/
+  #mobile_tools_list .mobile_tool:hover {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+  }
+
+  #mobile_tools_list .mobile_tool.active:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .dropdown_items span:hover {
+    background-color: white;
+  }
+
+  #table_mode_tabs .nav-link:hover {
+    border-color: #e9ecef #e9ecef #dee2e6 !important;
+  }
+}

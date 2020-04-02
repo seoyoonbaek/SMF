@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swimforever</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+  </script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/researchApp.css">
+  <script type="text/javascript" src="../js/apps/common.app.js"></script>
+  <script type="text/javascript" src="../js/apps/research.app.js"></script>
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow">
+    <div class="container-fluid">
+      <a class="navbar-brand text-uppercase text-expanded font-weight-bold" href="#">SwimForever</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto" id="menu">
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div id="mobile_tools_list" class="d-flex d-lg-none">
+    <div class="col-3 active mobile_tool" id="mobile_researchwindow_btn">
+        <i class="fas fa-search"></i>
+        <span>검색창 열기</span>
+    </div>
+    <div class="col-3 mobile_tool" id="mobile_note_btn">
+        <i class="far fa-clipboard"></i>
+        <span>노트</span>
+    </div>
+    <div class="col-3 mobile_tool" id="mobile_sort_btn">
+        <i class="fas fa-sort"></i>
+        <span>정렬</span>
+    </div>
+    <div class="col-3 mobile_tool" id="mobile_setting_btn">
+        <i class="fas fa-cog"></i>
+        <span>사용자 설정</span>
+    </div>
+  </div>
+  <div class="modal-container">
+    <div class="jumbotron modal-content p-2 pl-xl-5 pr-xl-5 text-center mx-2 mb-5 bg-light" style="border: 1px solid #bcbcbc; border-top: 0;">
+      <div id="mobile_tools_content">
+        <div id="mobile_note_table_tools" class="mobile_tool_item result_data_table_active">
+        </div>
+        <div id="mobile_sort_tools" class="mobile_tool_item">
+        </div>
+        <div id="mobile_setting_tools" class="mobile_tool_item form-row pr-4 pl-4">
+        </div>
+      </div>
+      <div id="searchForm_wrapper">
+        <div id="searchForm_tools">
+          <div id="searchForm_state_badge" class="show_inline_block">
+            <span class="badge badge-pill badge-primary search_state_research current_search_state">검색 모드</span>
+            <span class="badge badge-pill badge-secondary search_state_filtering">필터링 모드</span>
+          </div>
+          <div id="searchConditions_bar" class="d-none col-10">
+            <span class="badge badge-secondary">검색 조건</span>
+            <div id="searchConditions_bar_content">
+            </div>
+          </div>
+          <div id="searchForm_tools_button">
+            <button type="button" name="button" class="btn btn-warning reset_conditions_btn show_inline_block" aria-label="Reset conditions">
+              <span class="fa fa-sync-alt" aria-hidden="true"></span>
+            </button>
+            <button type="button" name="button" class="btn btn-primary research_btn show_inline_block" aria-label="Research">
+              <span class="fa fa-search" aria-hidden="true"></span>검색
+            </button>
+            <button type="button" name="button" class="btn btn-secondary hide_researchwindow_btn show_inline_block" aria-label="Hide research window">
+              <span class="fa fa-chevron-up" aria-hidden="true"></span>
+            </button>
+            <button type="button" name="button" class="btn btn-secondary show_researchwindow_btn" aria-label="Show research window">
+              검색창 열기<span class="fa fa-chevron-down" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+        <form autocomplete="off" id="searchForm" class="show">
+          <div class="form-row">
+            <div class="col-md-3 pr-lg-5">
+              <div class="form-row">
+                <div class="form-group col-md-12 col-7 pl-1 pr-1">
+                  <label class="ml-2 small">선수 이름</label>
+                  <input type="text" class="form-control" id="searchForm_player-name" placeholder="선수 이름">
+                </div>
+                <div class="form-group col-md-12 col-5 pl-1 pr-1">
+                  <label class="ml-2 small">선수 성별</label>
+                  <div class="selectbox" id="searchForm_player-sex">
+                    <label class="select_label" for="select_player-sex">전체</label>
+                    <select id="select_player-sex">
+                      <option selected>전체</option>
+                      <option>여자</option>
+                      <option>남자</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9 pl-md-2 pl-lg-5">
+              <div class="form-row">
+                <div class="form-group col-12 col-sm-7">
+                  <label class="ml-2 small">나이</label>
+                  <div class="row checkbox_items" style="margin-right: 0; margin-left: 0;" id="searchForm_age">
+                  </div>
+                  <div id="searchForm_age_criteria" class="mt-1 radio_items">
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="age_criteria_competition" class="custom-control-input" checked>
+                      <label class="custom-control-label" for="age_criteria_competition">대회당시</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="age_criteria_present" class="custom-control-input">
+                      <label class="custom-control-label" for="age_criteria_present">현재나이</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-6 col-sm-3">
+                  <label class="ml-2 small">종목</label>
+                  <div id="searchForm_style" class="checkbox_items">
+                  </div>
+                </div>
+                <div class="form-group col-6 col-sm-2">
+                  <label class="ml-2 small">거리</label>
+                  <div id="searchForm_distance" class="checkbox_items">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label class="ml-2 small">대회 년도</label>
+                <div id="searchForm_year">
+                  <div class="selectbox_wrapper">
+                    <div class="selectbox">
+                      <label class="select_label" for="select_year-from">전체</label>
+                      <select id="select_year-from">
+                      </select>
+                    </div>
+                    <label class="small">부터</label>
+                  </div>
+                  <div class="selectbox_wrapper">
+                    <div class="selectbox">
+                      <label class="select_label" for="select_year-to">전체</label>
+                      <select id="select_year-to">
+                      </select>
+                    </div>
+                    <label class="small">까지</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label class="ml-2 small">대회 장소</label>
+                <div class="input-group">
+                  <input type="text" id="searchForm_competition_name_input" class="form-control dropdown_input" placeholder="대회장소 검색" aria-label="대회장소 검색" aria-describedby="searchForm_competition_name_button">
+                  <div class="input-group-append">
+                    <button class="btn btn-md btn-info m-0 px-3 dropdown_button" type="button" name="button" id="searchForm_competition_name_button">▼</button>
+                  </div>
+                  <div id="searchForm_competition_name" class="dropdown_items">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label class="ml-2 small">팀(소속)</label>
+                <div class="input-group">
+                  <input type="text" id="searchForm_team_input" class="form-control dropdown_input" placeholder="팀명 검색" aria-label="팀명 검색" aria-describedby="searchForm_team_button">
+                  <div class="input-group-append">
+                    <button class="btn btn-md btn-info m-0 px-3 dropdown_button" type="button" name="button" id="searchForm_team_button">▼</button>
+                  </div>
+                  <div id="searchForm_team" class="dropdown_items">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <main role="main" class="container-fluid text-center pt-3 pt-lg-0">
+    <div class="result_data_table_active" id="table_wrapper">
+      <div class="d-none d-lg-flex" id="table_tools">
+        <ul class="nav nav-tabs d-none d-lg-flex" id="table_mode_tabs">
+          <li class="nav-item" id="result_data_table_mode">
+            <span class="nav-link active">검색 결과</span>
+          </li>
+          <li class="nav-item" id="note_table_mode">
+            <span class="nav-link">노트</span>
+          </li>
+        </ul>
+        <div id="note_table_tools">
+          <select class="select_notes">
+            <option>노트1</option>
+          </select>
+          <div class="save_records_to_note btn btn-secondary">
+            기록 담기
+          </div>
+          <div class="create_new_note btn btn-secondary">
+            새 노트
+          </div>
+          <div class="delete_note btn btn-secondary">
+            노트 삭제
+          </div>
+          <div class="delete_records btn btn-secondary">
+            기록 삭제
+          </div>
+        </div>
+        <div class="d-none d-lg-inline-block select_sort" style="position: absolute; right: 1rem;">
+          <span>정렬 기준:</span>
+          <div class="selectbox" id="searchResult_sort_category">
+            <label class="select_label" for="select_searchResult_sort_category">기록</label>
+            <select id="select_searchResult_sort_category" class="select_sort_category">
+              <option selected>기록</option>
+              <option>이름</option>
+              <option>성별</option>
+              <option>나이 그룹</option>
+              <option>종목</option>
+              <option>거리</option>
+              <option>기록</option>
+              <option>소속</option>
+              <option>대회명</option>
+              <option>대회일시</option>
+            </select>
+          </div>
+          <div class="selectbox" id="searchResult_sort_order">
+            <label class="select_label" for="select_searchResult_sort_order">오름차순</label>
+            <select id="select_searchResult_sort_order" class="select_sort_order">
+              <option selected>오름차순</option>
+              <option>내림차순</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <table class="table table-hover active" id="result_data_table">
+      </table>
+      <table class="table table-hover" id="note_table">
+      </table>
+      <div id="paginationWrapper_result" class="paginationWrapper"></div>
+      <div id="paginationWrapper_note" class="paginationWrapper"></div>
+    </div>
+  </main>
+
+  <footer class="footer text-faded text-center">
+    <div class="container">
+      <p class="m-1 small">
+        SwimForever는 Google Chrome에 최적화되어 있으며, Internet Explorer에서는 일부 기능이 동작하지 않을 수 있습니다.
+        <br />
+        SwimForever에 대한 더 자세한 정보가 궁금하시다면 본 사이트의 <a href="#">About Us</a> 페이지에서 확인하실 수 있습니다.
+      </p>
+      <p class="m-0 small">Copyright @ SwimForever 2020</p>
+    </div>
+  </footer>
+</body>
+
+</html>

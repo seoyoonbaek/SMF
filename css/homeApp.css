@@ -1,0 +1,121 @@
+.carousel {
+  margin-bottom: 1rem;
+  height: 30rem;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.carousel-inner {
+  width: 100% !important;
+  height: inherit !important;
+}
+
+.carousel-item {
+  width: 100% !important;
+  height: inherit !important;
+}
+
+.carousel-item a {
+  height: inherit;
+}
+
+.carousel-item a img {
+  display: block;
+  width: 100%;
+  height: inherit;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-item.active a {
+  font-weight: bold;
+  color: #28B0E0 !important;
+}
+
+.btn-login {
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  border-radius: 2rem;
+  max-height: 50px;
+  max-width: 110px;
+  background-color: #00afea;
+  border-color: #00afea;
+}
+
+.marketing .col-4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.marketing a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.marketing a:hover {
+  background: #f8f9fa;
+}
+
+.homeImageNav_img {
+  margin-bottom: 20px;
+  margin-right: 1rem;
+  width: 7rem;
+  height: 7rem;
+}
+
+.homeImageNav_title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 20pt;
+}
+
+.homeImageNav_explanation {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0rem !important;
+}
+
+@media only screen and (max-width: 992px) {
+  .homeImageNav_img {
+    width: 5rem;
+    height: 5rem;
+    display: inline-block;
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .homeImageNav_img {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  .homeImageNav_title {
+    font-weight: bold;
+    font-size: 15pt;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .carousel {
+    height: 20rem;
+  }
+
+  .homeImageNav_img {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+
+  .homeImageNav_title {
+    font-weight: bold;
+    font-size: 11pt;
+    display: block !important;
+  }
+}
