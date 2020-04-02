@@ -34,6 +34,8 @@ http://www.swimforever.net/test/test_jy/mvc_ver/html/research.html
 </br></br>
 검색 결과 테이블에서나 노트 테이블에서나 정렬 기능을 제공하여 사용자의 편의성을 높였다.
 </br>
+(검색 결과 테이블에서는 현재 활성화되어 있는 노트에 이미 담겨있는 기록에 대해서 표시를 해주었다. 이를 통해 사용자들이 한 노트에 중복된 기록을 담는 실수를 저지르지 않도록 도와주고 있다.)
+</br>
 ![smf_screenshot_7](./readme_images/smf_screenshot_7.PNG)
 </br>
 ![smf_screenshot_8](./readme_images/smf_screenshot_8.PNG)
@@ -55,7 +57,7 @@ mysql
 
 
 ## Authors
-Jiyun Lee, Seoyoon Baek
+Jiyun Lee
 
 <!--
 ## Code style
