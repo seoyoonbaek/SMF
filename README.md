@@ -7,7 +7,7 @@ The website for searching records on the Korean Masters Championships with HTML,
 
 
 ## How to use?
-개발 및 테스트가 끝난 후 2020년이 지나기 전에 베타 서비스를 오픈할 예정입니다.</br>
+개발 및 테스트가 끝난 후 베타 서비스를 오픈할 예정입니다.</br>
 아래의 url을 클릭하면 검색 결과 기능을 사용해 볼 수 있습니다. </br>
 http://www.swimforever.net/test/test_jy/mvc_ver/html/research.html
 
