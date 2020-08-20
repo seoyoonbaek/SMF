@@ -21,7 +21,7 @@
 <body>
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow">
     <div class="container-fluid">
-      <a class="navbar-brand text-uppercase text-expanded font-weight-bold" href="#">SwimForever</a>
+      <a class="navbar-brand text-expanded font-weight-bold" href="#">SwimForever</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,6 +31,7 @@
       </div>
     </div>
   </nav>
+  <!--
   <div id="mobile_tools_list" class="d-flex d-lg-none">
     <div class="col-3 active mobile_tool" id="mobile_researchwindow_btn">
         <i class="fas fa-search"></i>
@@ -49,8 +50,10 @@
         <span>사용자 설정</span>
     </div>
   </div>
+-->
   <div class="modal-container">
-    <div class="jumbotron modal-content p-2 pl-xl-5 pr-xl-5 text-center mx-2 mb-5 bg-light" style="border: 1px solid #bcbcbc; border-top: 0;">
+    <div class="jumbotron modal-content p-1 pl-xl-5 pr-xl-5 text-center mx-2 mb-1 mb-lg-3 bg-light" style="border: 1px solid #bcbcbc; border-top: 0;">
+      <!--
       <div id="mobile_tools_content">
         <div id="mobile_note_table_tools" class="mobile_tool_item result_data_table_active">
         </div>
@@ -59,18 +62,20 @@
         <div id="mobile_setting_tools" class="mobile_tool_item form-row pr-4 pl-4">
         </div>
       </div>
+-->
       <div id="searchForm_wrapper">
         <div id="searchForm_tools">
           <div id="searchForm_state_badge" class="show_inline_block">
             <span class="badge badge-pill badge-primary search_state_research current_search_state">검색 모드</span>
             <span class="badge badge-pill badge-secondary search_state_filtering">필터링 모드</span>
           </div>
-          <div id="searchConditions_bar" class="d-none col-10">
-            <span class="badge badge-secondary">검색 조건</span>
-            <div id="searchConditions_bar_content">
+          <div id="searchConditions_bar" class="d-none col-10 p-0 pt-lg-2">
+            <span class="badge badge-secondary d-none d-lg-inline-block">검색 조건</span>
+            <div id="searchConditions_bar_content" class="d-inline">
+              검색 조건이 없습니다.
             </div>
           </div>
-          <div id="searchForm_tools_button">
+          <div id="searchForm_tools_button" class="p-0 pt-lg-2">
             <button type="button" name="button" class="btn btn-warning reset_conditions_btn show_inline_block" aria-label="Reset conditions">
               <span class="fa fa-sync-alt" aria-hidden="true"></span>
             </button>
@@ -81,7 +86,8 @@
               <span class="fa fa-chevron-up" aria-hidden="true"></span>
             </button>
             <button type="button" name="button" class="btn btn-secondary show_researchwindow_btn" aria-label="Show research window">
-              검색창 열기<span class="fa fa-chevron-down" aria-hidden="true"></span>
+              <span class="d-none d-lg-inline-block">검색창 열기</span>
+              <span class="fa fa-chevron-down" aria-hidden="true"></span>
             </button>
           </div>
         </div>
@@ -89,12 +95,12 @@
           <div class="form-row">
             <div class="col-md-3 pr-lg-5">
               <div class="form-row">
-                <div class="form-group col-md-12 col-7 pl-1 pr-1">
-                  <label class="ml-2 small">선수 이름</label>
+                <div class="form-group mb-0 mb-md-3 col-md-12 col-7 pl-1 pr-1">
+                  <label class="ml-2 mb-1 mb-lg-2 small">선수 이름</label>
                   <input type="text" class="form-control" id="searchForm_player-name" placeholder="선수 이름">
                 </div>
-                <div class="form-group col-md-12 col-5 pl-1 pr-1">
-                  <label class="ml-2 small">선수 성별</label>
+                <div class="form-group mb-0 mb-md-3 col-md-12 col-5 pl-1 pr-1">
+                  <label class="ml-2 mb-1 mb-lg-2 small">선수 성별</label>
                   <div class="selectbox" id="searchForm_player-sex">
                     <label class="select_label" for="select_player-sex">전체</label>
                     <select id="select_player-sex">
@@ -108,8 +114,8 @@
             </div>
             <div class="col-md-9 pl-md-2 pl-lg-5">
               <div class="form-row">
-                <div class="form-group col-12 col-sm-7">
-                  <label class="ml-2 small">나이</label>
+                <div class="form-group mb-0 mb-md-3 col-12 col-sm-7">
+                  <label class="ml-2 mb-1 mb-lg-2 small">나이</label>
                   <div class="row checkbox_items" style="margin-right: 0; margin-left: 0;" id="searchForm_age">
                   </div>
                   <div id="searchForm_age_criteria" class="mt-1 radio_items">
@@ -123,13 +129,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-6 col-sm-3">
-                  <label class="ml-2 small">종목</label>
+                <div class="form-group mb-0 mb-md-3 col-6 col-sm-3">
+                  <label class="ml-2 mb-1 mb-lg-2 small">종목</label>
                   <div id="searchForm_style" class="checkbox_items">
                   </div>
                 </div>
-                <div class="form-group col-6 col-sm-2">
-                  <label class="ml-2 small">거리</label>
+                <div class="form-group mb-0 mb-md-3 col-6 col-sm-2">
+                  <label class="ml-2 mb-1 mb-lg-2 small">거리</label>
                   <div id="searchForm_distance" class="checkbox_items">
                   </div>
                 </div>
@@ -138,8 +144,8 @@
           </div>
           <div class="form-row">
             <div class="col-sm-4">
-              <div class="form-group">
-                <label class="ml-2 small">대회 년도</label>
+              <div class="form-group mb-0 mb-md-3">
+                <label class="ml-2 mb-1 mb-lg-2 small">대회 년도</label>
                 <div id="searchForm_year">
                   <div class="selectbox_wrapper">
                     <div class="selectbox">
@@ -161,8 +167,8 @@
               </div>
             </div>
             <div class="col-sm-4">
-              <div class="form-group">
-                <label class="ml-2 small">대회 장소</label>
+              <div class="form-group mb-0 mb-md-3">
+                <label class="ml-2 mb-1 mb-lg-2 small">대회 장소</label>
                 <div class="input-group">
                   <input type="text" id="searchForm_competition_name_input" class="form-control dropdown_input" placeholder="대회장소 검색" aria-label="대회장소 검색" aria-describedby="searchForm_competition_name_button">
                   <div class="input-group-append">
@@ -174,8 +180,8 @@
               </div>
             </div>
             <div class="col-sm-4">
-              <div class="form-group">
-                <label class="ml-2 small">팀(소속)</label>
+              <div class="form-group mb-0 mb-md-3">
+                <label class="ml-2 mb-1 mb-lg-2 small">팀(소속)</label>
                 <div class="input-group">
                   <input type="text" id="searchForm_team_input" class="form-control dropdown_input" placeholder="팀명 검색" aria-label="팀명 검색" aria-describedby="searchForm_team_button">
                   <div class="input-group-append">
@@ -192,18 +198,21 @@
     </div>
   </div>
 
-  <main role="main" class="container-fluid text-center pt-3 pt-lg-0">
+  <main role="main" class="container-fluid text-center pt-1 pt-lg-0">
     <div class="result_data_table_active" id="table_wrapper">
-      <div class="d-none d-lg-flex" id="table_tools">
-        <ul class="nav nav-tabs d-none d-lg-flex" id="table_mode_tabs">
+      <div class="d-flex" id="table_tools">
+        <ul class="nav nav-tabs d-flex" id="table_mode_tabs">
           <li class="nav-item" id="result_data_table_mode">
-            <span class="nav-link active">검색 결과</span>
+            <span class="nav-link active">
+              <span class="d-none d-lg-inline-block">검색 결과</span>
+              <span class="d-inline-block d-lg-none">결과</span>
+            </span>
           </li>
           <li class="nav-item" id="note_table_mode">
             <span class="nav-link">노트</span>
           </li>
         </ul>
-        <div id="note_table_tools">
+        <div class="d-none d-lg-inline-block" id="note_table_tools">
           <select class="select_notes">
             <option>노트1</option>
           </select>
@@ -245,11 +254,52 @@
             </select>
           </div>
         </div>
+        <div class="d-inline-block d-lg-none" id="mobile_select_notes">
+          <select class="select_notes">
+            <option>노트1</option>
+          </select>
+        </div>
+
+        <div id="mobile_tools_div">
+          <div class="d-inline-block d-lg-none" id="mobile_tools_btn">
+            <button type="button" name="button" class="btn btn-default open_tools active">
+              <img src="../img/icon/tools_open.png" alt="모바일용 도구함 열기" style="width: 1.3rem;">
+              도구함
+            </button>
+            <button type="button" name="button" class="btn btn-default close_tools">
+              <img src="../img/icon/tools_close.png" alt="모바일용 도구함 닫기" style="width: 1.3rem;">
+              도구함
+            </button>
+          </div>
+          <div id="mobile_tools_list">
+            <div class="mobile_tool save_records_to_note result_active">
+              <span class="mobile_tool_span">노트에 기록 담기</span>
+            </div>
+            <div class="mobile_tool create_new_note note_active">
+              <span class="mobile_tool_span">새 노트 생성하기</span>
+            </div>
+            <div class="mobile_tool delete_note note_active">
+              <span class="mobile_tool_span">현재 노트 삭제하기</span>
+            </div>
+            <div class="mobile_tool delete_records note_active">
+              <span class="mobile_tool_span">기록 삭제하기</span>
+            </div>
+            <div class="mobile_tool" id="mobile_sort_btn">
+              <span class="mobile_tool_span">정렬 기준 설정</span>
+            </div>
+            <div class="mobile_tool" id="mobile_setting_btn">
+              <span class="mobile_tool_span">필드 보이기/숨기기</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <table class="table table-hover active" id="result_data_table">
-      </table>
-      <table class="table table-hover" id="note_table">
-      </table>
+
+      <div id="table_content_wrapper">
+        <table class="table table-hover active mb-1" id="result_data_table">
+        </table>
+        <table class="table table-hover mb-1" id="note_table">
+        </table>
+      </div>
       <div id="paginationWrapper_result" class="paginationWrapper"></div>
       <div id="paginationWrapper_note" class="paginationWrapper"></div>
     </div>
@@ -265,6 +315,60 @@
       <p class="m-0 small">Copyright @ SwimForever 2020</p>
     </div>
   </footer>
+
+  <div id="modals">
+    <div class="modal fade" id="errorMsg_modal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header p-1">
+            <h5 class="modal-title">알림</h5>
+          </div>
+          <div class="modal-body p-1 text-center">
+            <p style="font-size: 0.9rem;">노트 모드 활성화 동안에는 검색기능을 사용하실 수 없습니다!<br><br>검색기능을 사용하시려면 노트 모드를 비활성화해서 검색 결과 모드로 돌아가주세요.</p>
+          </div>
+          <div class="modal-footer p-1">
+            <button type="button" class="btn btn-default close_modal">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="mobile_sort_modal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header p-1">
+            <h5 class="modal-title">정렬</h5>
+          </div>
+          <div class="modal-body p-1">
+            <!-- template.js -->
+          </div>
+          <div class="modal-footer p-1">
+            <button type="button" class="btn btn-warning apply_modal">적용</button>
+            <button type="button" class="btn btn-default close_modal">취소</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="mobile_setting_modal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header p-1">
+            <h5 class="modal-title">필드 설정</h5>
+          </div>
+          <div class="modal-body p-1">
+            <!-- template.js -->
+          </div>
+          <div class="modal-footer p-1">
+            <button type="button" class="btn btn-warning apply_modal">적용</button>
+            <button type="button" class="btn btn-default close_modal">취소</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </body>
 
 </html>

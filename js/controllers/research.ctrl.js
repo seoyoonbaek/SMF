@@ -39,6 +39,9 @@
     var self = this;
     // 테이블 초기화에는 note 데이터만 필요하므로
     var table_mode = 'note_table_mode';
+    self.model.getNoteTitleList(function(data){
+      self.view.set_note_list(data);
+    });
     self.model.get_nextResult_by_mode(table_mode, function(data){
       self.model.get_outputState_by_mode(table_mode, function(outputState){
         if (self.view.render('setTables', data)){
@@ -85,6 +88,9 @@
     this.view.bind('select_year_change', function(select, another_select){
       self.select_year_change(select, another_select);
     });
+    this.view.bind('mobile_tools_active_body_click', function(target){
+      self.mobile_tools_active_body_click(target);
+    });
     this.view.bind('radio_click', function(radio_item, radio_array){
       self.radio_click(radio_item, radio_array);
     });
@@ -109,15 +115,26 @@
     this.view.bind('tableModeTabs_click', function(active_table_mode){
       self.tableModeTabs_click(active_table_mode);
     });
+    this.view.bind('mobile_tools_btn_click', function(target){
+      self.mobile_tools_btn_click(target);
+    });
+    this.view.bind('mobile_sort_btn_click', function(){
+      self.mobile_sort_btn_click();
+    });
+    this.view.bind('mobile_setting_btn_click', function(){
+      self.mobile_setting_btn_click();
+    });
+    /*
     this.view.bind('mobile_tools_click', function(target){
       self.mobile_tools_click(target);
     });
-    this.view.bind('mobile_note_active_btn_checkbox_click', function(prev_active_table_mode){
-      self.mobile_note_active_btn_checkbox_click(prev_active_table_mode);
+    this.view.bind('mobile_note_active_btn_checkbox_click', function(){
+      self.mobile_note_active_btn_checkbox_click();
     });
     this.view.bind('mobile_update_settingData_btn_click', function(mobile_setting_td_line, mobile_setting_td_category_array){
       self.mobile_update_settingData_btn_click(mobile_setting_td_line, mobile_setting_td_category_array);
     });
+    */
     this.view.bind('note_select_all_records_click', function(target){
       self.note_select_all_records_click(target);
     });
@@ -144,6 +161,9 @@
     });
     this.view.bind('window_beforeunload', function(){
       self.window_beforeunload();
+    });
+    this.view.bind('modals_click', function(target, modalID){
+      self.modals_click(target, modalID);
     });
   };
 
@@ -178,6 +198,10 @@
     this.view.select_year_change(select, another_select);
   };
 
+  ResearchController.prototype.mobile_tools_active_body_click = function(target){
+    this.view.mobile_tools_active_body_click(target);
+  };
+
   ResearchController.prototype.radio_click = function(radio_item, radio_array){
     this.view.radio_click(radio_item, radio_array);
   };
@@ -191,6 +215,8 @@
     var searchState = currentSearchState;
     var table_mode = 'result_data_table_mode';
     this.view.setSearchConditionsBar(searchConditions);
+    this.view.setTableFields(searchConditions);
+    this.view.setSearchResultTable();
     this.view.research_btn_click();
     if (searchState === '검색 모드'){
       this.model.getSearchResult_fromDB(searchConditions, function(){
@@ -267,6 +293,19 @@
     });
   };
 
+  ResearchController.prototype.mobile_tools_btn_click = function(target){
+    var self = this;
+    this.view.mobile_tools_btn_click(target);
+  };
+
+  ResearchController.prototype.mobile_sort_btn_click = function(){
+    this.view.mobile_sort_btn_click();
+  };
+
+  ResearchController.prototype.mobile_setting_btn_click = function(){
+    this.view.mobile_setting_btn_click();
+  };
+
   ResearchController.prototype.mobile_tools_click = function(target){
     var self = this;
     var researchConditions = new Object;
@@ -280,19 +319,8 @@
     });
   };
 
-  ResearchController.prototype.mobile_note_active_btn_checkbox_click = function(prev_active_table_mode){
-    var self = this;
-    var active_table_mode = "";
-    if (prev_active_table_mode === 'result_data_table_mode'){
-      active_table_mode = 'note_table_mode';
-    } else {
-      active_table_mode = 'result_data_table_mode';
-    }
+  ResearchController.prototype.mobile_note_active_btn_checkbox_click = function(){
     this.view.mobile_note_active_btn_checkbox_click();
-    this.model.get_outputState_by_mode(active_table_mode, function(outputState){
-      self.view.set_Pagination_by_mode(active_table_mode, outputState);
-      self.check_saved_data();
-    });
   };
 
   ResearchController.prototype.mobile_update_settingData_btn_click = function(mobile_setting_td_line, mobile_setting_td_category_array){
@@ -350,6 +378,7 @@
 
   ResearchController.prototype.check_saved_data = function(){
     var self = this;
+    var saved_dataArr = new Array();
     this.model.get_saved_data(function(data){
       self.view.check_saved_data(data);
     });
@@ -372,7 +401,7 @@
           });
         });
       } else {
-        common.makeToastMsg('노트는 최대 5개까지 만들 수 있습니다!', 3000);
+        common.makeToastMsg('노트는 최대 5개까지 만들 수 있습니다!', 4000);
       }
     });
   };
@@ -396,9 +425,8 @@
           });
         });
       } else {
-        var msg = '노트가 총 1개일 경우 노트자체를 삭제하실 수 없습니다.' +
-                  '남은 기록들을 모두 지우고 싶으시다면 기록들을 전체 선택한 후 기록삭제를 눌러주세요.';
-        common.makeToastMsg(msg , 3000);
+        var msg = '남아있는 노트가 1개일 경우 노트 삭제를 하실 수 없습니다.';
+        common.makeToastMsg(msg , 4000);
       }
     });
   };
@@ -457,6 +485,22 @@
         self.model.save_localStorageData(noteData, settingData);
       });
     });
+  };
+
+  ResearchController.prototype.modals_click = function(target, modalID){
+    var self = this;
+
+    if (target.classList.contains('apply_modal')){
+      if (modalID == 'mobile_setting_modal'){
+
+      } else if (modalID == 'mobile_sort_modal'){
+        var sort_data = new Array();
+        var table_mode = self.view.get_current_active_table_mode();
+        sort_data = self.view.get_mobile_sort_data();
+        self.select_sort_click(table_mode, sort_data[0], sort_data[1]);
+      }
+    }
+    self.view.close_modals(modalID);
   };
 
   common.setNamespace('researchController');

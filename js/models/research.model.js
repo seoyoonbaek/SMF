@@ -11,7 +11,7 @@
       {
         "id": 0,
         "title": "Home",
-        "link": "./index.html"
+        "link": "#"
       },
       {
         "id": 1,

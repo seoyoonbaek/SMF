@@ -30,9 +30,131 @@
     this.tableTemplate =
       '<thead>' +
         '<tr>' +
-          '<th scope="row" class="table_checkbox d-none d-lg-block d-xl-block">' +
-            '<div class="th-text" style="font-size: 10pt;">선택</div>' +
-            '<input class="select_all_records" type="checkbox">' +
+          '{{th0}}' +
+          '{{th1}}' +
+          '{{th2}}' +
+          '{{th3}}' +
+          '{{th4}}' +
+          '{{th5}}' +
+          '{{th6}}' +
+          '{{th7}}' +
+          '{{th8}}' +
+          '{{th9}}' +
+          '{{th10}}' +
+          '{{th11}}' +
+        '</tr>' +
+      '</thead>' +
+      '<tbody>' +
+        '{{initMemo}}' +
+      '</tbody>';
+    this.initial_tableTemplate = this.tableTemplate;
+    this.th_number_template =
+      '<th scope="row" class="table_number">' +
+        '<div class="th-text">번호</div>' +
+       '</th>';
+    this.th_pname_template =
+      '<th scope="row" class="table_pname">' +
+        '<div class="th-text">이름</div>' +
+      '</th>';
+    this.th_sex_template =
+      '<th scope="row" class="table_sex">' +
+        '<div class="th-text">성별</div>' +
+      '</th>';
+    this.th_age_template =
+      '<th scope="row" class="table_age">' +
+        '<div class="th-text">나이 그룹</div>' +
+      '</th>';
+    this.th_style_template =
+      '<th scope="row" class="table_style">' +
+        '<div class="th-text">종목</div>' +
+      '</th>';
+    this.th_distance_template =
+      '<th scope="row" class="table_distance">' +
+        '<div class="th-text">거리</div>' +
+      '</th>';
+    this.th_record_template =
+      '<th scope="row" class="table_record">' +
+        '<div class="th-text">기록</div>' +
+      '</th>';
+    this.th_team_template =
+      '<th scope="row" class="table_team">' +
+        '<div class="th-text">소속</div>' +
+      '</th>';
+    this.th_competition_name_template =
+      '<th scope="row" class="table_competition_name">' +
+        '<div class="th-text">대회명</div>' +
+      '</th>';
+    this.th_competitionDate_template =
+      '<th scope="row" class="table_competitionDate">' +
+        '<div class="th-text">대회일시</div>' +
+      '</th>';
+    this.th_remark_template =
+      '<th scope="row" class="table_remark">' +
+        '<div class="th-text">비고</div>' +
+      '</th>';
+    this.th_checkbox_template =
+      '<th scope="row" class="table_checkbox">' +
+        '<input class="select_all_records" type="checkbox">' +
+      '</th>';
+    this.loading_searchResultTemplate =
+      '<div class="displayLoading spinner-border text-primary" role="status">' +
+        '<span class="sr-only">Loading...</span>' +
+      '</div>';
+    this.no_data_ErrorMsgTemplate =
+      '<tr class="initMemo">' +
+        '<th scope="row"></th>' +
+        '<td colspan="12">' +
+          '<span>{{message}}</span>' +
+        '</td>' +
+      '</tr>';
+    this.searchResultTemplate =
+      '<tr class="data">' +
+        '<th scope="row" style="display: none">{{index}}</th>' +
+        '{{td0}}' +
+        '{{td1}}' +
+        '{{td2}}' +
+        '{{td3}}' +
+        '{{td4}}' +
+        '{{td5}}' +
+        '{{td6}}' +
+        '{{td7}}' +
+        '{{td8}}' +
+        '{{td9}}' +
+        '{{td10}}' +
+        '{{td11}}' +
+      '</tr>';
+    this.initial_searchResultTemplate = this.searchResultTemplate;
+    this.td_number_template =
+      '<td class="table_number mobile_table_number mobile_col-4">{{number}}</td>';
+    this.td_pname_template =
+      '<td class="table_pname mobile_table_pname mobile_col-4">{{player_name}}</td>';
+    this.td_sex_template =
+      '<td class="table_sex mobile_table_sex mobile_col-4">{{player_sex}}</td>';
+    this.td_age_template =
+      '<td class="table_age mobile_table_age mobile_col-4">{{player_age_competition}}</td>';
+    this.td_style_template =
+      '<td class="table_style mobile_table_style mobile_col-4">{{style}}</td>';
+    this.td_distance_template =
+      '<td class="table_distance mobile_table_distance mobile_col-4">{{distance}}</td>';
+    this.td_record_template =
+      '<td class="table_record mobile_table_record mobile_col-4">{{record}}</td>';
+    this.td_team_template =
+      '<td class="table_team mobile_table_team mobile_col-4">{{player_team}}</td>';
+    this.td_competition_name_template =
+      '<td class="table_competition_name mobile_table_competition_name mobile_col-4">{{competition_name}}</td>';
+    this.td_competitionDate_template =
+      '<td class="table_competitionDate mobile_table_competitionDate mobile_col-4">{{competition_date}}</td>';
+    this.td_remark_template =
+      '<td class="table_remark mobile_table_remark mobile_col-4">{{remark}}</td>';
+    this.td_checkbox_template =
+      '<td class="table_checkbox">' +
+        '<input class="select_record" type="checkbox">' +
+      '</td>';
+    this.noteTableTemplate =
+      '<thead>' +
+        '<tr>' +
+          '<th scope="row" class="table_number">' +
+            '<div class="th-text">번호</div>' +
           '</th>' +
           '<th scope="row" class="table_pname">' +
             '<div class="th-text">이름</div>' +
@@ -61,48 +183,41 @@
           '<th scope="row" class="table_competitionDate">' +
             '<div class="th-text">대회일시</div>' +
           '</th>' +
-          '<th scope="row" class="table_note">' +
+          '<th scope="row" class="table_remark">' +
             '<div class="th-text">비고</div>' +
+          '</th>' +
+          '<th scope="row" class="table_checkbox">' +
+            '<input class="select_all_records" type="checkbox">' +
           '</th>' +
         '</tr>' +
       '</thead>' +
       '<tbody>' +
         '{{initMemo}}' +
       '</tbody>';
-    this.loading_searchResultTemplate =
-      '<div class="displayLoading spinner-border text-primary" role="status">' +
-        '<span class="sr-only">Loading...</span>' +
-      '</div>';
-    this.no_data_ErrorMsgTemplate =
-      '<tr class="initMemo">' +
-        '<th scope="row"></th>' +
-        '<td colspan="10">' +
-          '<span>{{message}}</span>' +
-        '</td>' +
-      '</tr>';
-    this.searchResultTemplate =
+    this.noteDataTemplate =
       '<tr class="data">' +
         '<th scope="row" style="display: none">{{index}}</th>' +
-        '<td class="table_checkbox d-none d-lg-block d-xl-block">' +
-          '<input class="select_record" type="checkbox">' +
-        '</td>' +
+        '<td class="table_number mobile_table_number mobile_col-4">{{number}}</td>' +
         '<td class="table_pname mobile_table_pname mobile_col-4">{{player_name}}</td>' +
         '<td class="table_sex mobile_table_sex mobile_col-4">{{player_sex}}</td>' +
-        '<td class="table_age mobile_table_age mobile_col-4">{{player_age_competition}}세</td>' +
+        '<td class="table_age mobile_table_age mobile_col-4">{{player_age_competition}}</td>' +
         '<td class="table_style mobile_table_style mobile_col-4">{{style}}</td>' +
         '<td class="table_distance mobile_table_distance mobile_col-4">{{distance}}</td>' +
-        '<td class="table_record mobile_table_record mobile_col-4">{{record}}초</td>' +
+        '<td class="table_record mobile_table_record mobile_col-4">{{record}}</td>' +
         '<td class="table_team mobile_table_team mobile_col-4">{{player_team}}</td>' +
         '<td class="table_competition_name mobile_table_competition_name mobile_col-4">{{competition_name}}</td>' +
         '<td class="table_competitionDate mobile_table_competitionDate mobile_col-4">{{competition_date}}</td>' +
         '<td class="table_remark mobile_table_remark mobile_col-4">{{remark}}</td>' +
+        '<td class="table_checkbox">' +
+          '<input class="select_record" type="checkbox">' +
+        '</td>' +
       '</tr>';
     this.paginationTemplate =
       '<ul class="pagination justify-content-center" style="margin:20px 0">' +
         '{{pagelist}}' +
       '</ul>';
     this.searchConditionsTemplate =
-      '<p>#{{searchCondition}}</p>';
+      '<p class="{{is_single}}">#{{searchCondition}}</p>';
     this.mobileTool_noteTemplate =
       '<div class="current_table_state d-block d-sm-inline-block mb-3 mb-sm-0">' +
         '<div class="mobile_note_active_btn mr-2 d-inline-block">' +
@@ -135,15 +250,15 @@
         '</div>' +
       '</div>';
     this.mobileTool_sortTemplate =
-      '<div class="text-center d-block d-sm-inline-block mb-3 mb-sm-0 select_sort">' +
-        '<span class="pt-2 mr-2">정렬 기준:</span>' +
-        '<div class="selectbox mr-2" id="mobile_searchResult_sort_category">' +
+      '<div class="text-center m-1 mobile_select_sort">' +
+        '<span class="pt-2 mr-2">기준:</span>' +
+        '<div class="selectbox mr-2 d-inline-block" id="mobile_searchResult_sort_category">' +
           '<label class="select_label" for="mobile_select_searchResult_sort_category">기록</label>' +
           '<select id="mobile_select_searchResult_sort_category" class="select_sort_category">' +
             '<option selected>기록</option>' +
             '<option>이름</option>' +
             '<option>성별</option>' +
-            '<option>나이 그룹</option>' +
+            '<option>나이그룹</option>' +
             '<option>종목</option>' +
             '<option>거리</option>' +
             '<option>기록</option>' +
@@ -152,7 +267,7 @@
             '<option>대회일시</option>' +
           '</select>' +
         '</div>' +
-        '<div class="selectbox" id="mobile_searchResult_sort_order">' +
+        '<div class="selectbox d-inline-block" id="mobile_searchResult_sort_order">' +
           '<label class="select_label" for="mobile_select_searchResult_sort_order">오름차순</label>' +
           '<select id="mobile_select_searchResult_sort_order" class="select_sort_order">' +
             '<option selected>오름차순</option>' +
@@ -161,6 +276,7 @@
         '</div>' +
       '</div>';
     this.mobileTool_settingTemplate =
+    /*
       '<div class="form-group col-12 col-sm-5 p-0">' +
         '<label class="ml-2 small">출력 형식</label>' +
         '<div id="mobile_setting_td_line" class="radio_items">' +
@@ -174,17 +290,19 @@
           '</div>' +
         '</div>' +
       '</div>' +
+    */
       '<div class="form-group col-12 col-sm-7 p-0">' +
         '<label class="ml-2 small">출력 항목</label>' +
         '<div class="row checkbox_items mr-0 ml-0" id="mobile_setting_td_category">' +
           '{{categorylist}}' +
         '</div>' +
-      '</div>' +
+      '</div>';
+      /*
       '<div class="w-100">' +
         '<button type="button" name="button" class="btn btn-warning update_settingData_btn" aria-label="Update settingData">' +
           '<span>적용</span>' +
         '</button>' +
-      '</div>';
+      '</div>';*/
   }
 
   ResearchTemplate.prototype.setMenu = function(data){
@@ -297,11 +415,107 @@
     return view;
   };
 
+  ResearchTemplate.prototype.initTableTemplates = function(){
+    this.tableTemplate = this.tableTemplate.replace(/{{th0}}/gi, this.th_number_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th1}}/gi, this.th_pname_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th2}}/gi, this.th_sex_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th3}}/gi, this.th_age_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th4}}/gi, this.th_style_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th5}}/gi, this.th_distance_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th6}}/gi, this.th_record_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th7}}/gi, this.th_team_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th8}}/gi, this.th_competition_name_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th9}}/gi, this.th_competitionDate_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th10}}/gi, this.th_remark_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th11}}/gi, this.th_checkbox_template);
+
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td0}}/gi, this.td_number_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td1}}/gi, this.td_pname_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td2}}/gi, this.td_sex_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td3}}/gi, this.td_age_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td4}}/gi, this.td_style_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td5}}/gi, this.td_distance_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td6}}/gi, this.td_record_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td7}}/gi, this.td_team_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td8}}/gi, this.td_competition_name_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td9}}/gi, this.td_competitionDate_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td10}}/gi, this.td_remark_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td11}}/gi, this.td_checkbox_template);
+  };
+
+  ResearchTemplate.prototype.setTableTemplates = function(conditions){
+    var self = this;
+    var fieldsOrderMap = this.get_fieldsOrder(conditions);
+    var th_templates = [];
+    var td_templates = [];
+
+    this.tableTemplate = this.initial_tableTemplate;
+    this.searchResultTemplate = this.initial_searchResultTemplate;
+
+    fieldsOrderMap.forEach((value, key) => {
+      switch (value) {
+        case "player_name":
+          th_templates.push(self.th_pname_template);
+          td_templates.push(self.td_pname_template);
+          break;
+        case "player_sex":
+          th_templates.push(self.th_sex_template);
+          td_templates.push(self.td_sex_template);
+          break;
+        case "player_age":
+          th_templates.push(self.th_age_template);
+          td_templates.push(self.td_age_template);
+          break;
+        case "style":
+          th_templates.push(self.th_style_template);
+          td_templates.push(self.td_style_template);
+          break;
+        case "distance":
+          th_templates.push(self.th_distance_template);
+          td_templates.push(self.td_distance_template);
+          break;
+        case "record":
+          th_templates.push(self.th_record_template);
+          td_templates.push(self.td_record_template);
+          break;
+        case "player_team":
+          th_templates.push(self.th_team_template);
+          td_templates.push(self.td_team_template);
+          break;
+        case "competition_name":
+          th_templates.push(self.th_competition_name_template);
+          td_templates.push(self.td_competition_name_template);
+          break;
+        case "competition_date":
+          th_templates.push(self.th_competitionDate_template);
+          td_templates.push(self.td_competitionDate_template);
+          break;
+        default:
+      }
+    });
+
+    this.tableTemplate = this.tableTemplate.replace(/{{th0}}/gi, this.th_number_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td0}}/gi, this.td_number_template);
+
+    for(var i = 0; i < 9; i++){
+      var temp = "{{th" + (i + 1) + "}}";
+      this.tableTemplate = this.tableTemplate.replace(temp, th_templates[i]);
+      temp = "{{td" + (i + 1) + "}}";
+      this.searchResultTemplate = this.searchResultTemplate.replace(temp, td_templates[i]);
+    }
+
+    this.tableTemplate = this.tableTemplate.replace(/{{th10}}/gi, this.th_remark_template);
+    this.tableTemplate = this.tableTemplate.replace(/{{th11}}/gi, this.th_checkbox_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td10}}/gi, this.td_remark_template);
+    this.searchResultTemplate = this.searchResultTemplate.replace(/{{td11}}/gi, this.td_checkbox_template);
+
+  };
+
   ResearchTemplate.prototype.setResultTable = function(){
     var view = "";
     var template = this.tableTemplate;
     var result_data_table_initMemo = '<tr class="initMemo">' +
-                                      '<td colspan="11">' +
+                                      '<td colspan="12">' +
                                         '<span>검색 조건을 입력한 후 검색 버튼을 눌러주세요!</span>' +
                                       '</td>' +
                                      '</tr>';
@@ -313,15 +527,15 @@
   ResearchTemplate.prototype.setNoteTable = function(data) {
     var self = this;
     var view = "";
-    var template = this.tableTemplate;
+    var template = this.noteTableTemplate;
     var note_table_initMemo = '<tr class="initMemo">' +
-                                '<td colspan="11">' +
+                                '<td colspan="12">' +
                                   '<span>아직 노트에 담은 기록이 없습니다!</span>' +
                                 '</td>' +
                               '</tr>';
     var table_data_template = "";
     if (data.length > 0){
-      table_data_template = self.setSearchResult(data);
+      table_data_template = self.setSearchResult('note', data);
       template = template.replace(/{{initMemo}}/gi, table_data_template);
     } else {
       template = template.replace(/{{initMemo}}/gi, note_table_initMemo);
@@ -335,13 +549,18 @@
     return view;
   };
 
-  ResearchTemplate.prototype.setSearchResult = function(data){
+  ResearchTemplate.prototype.setSearchResult = function(table_mode, data){
     var view = "";
     var self = this;
     if (data){
       for (var i=0; i<data.length; i++){
-        var template = this.searchResultTemplate;
+        var template;
+        if (table_mode == 'searchResult')
+          template = this.searchResultTemplate;
+        else
+          template = this.noteDataTemplate;
         template = template.replace(/{{index}}/gi, data[i].index);
+        template = template.replace(/{{number}}/gi, (i + 1));
         template = template.replace(/{{player_name}}/gi, self.get_name_form(data[i].player_name));
         template = template.replace(/{{player_sex}}/gi, data[i].player_sex);
         template = template.replace(/{{player_age_competition}}/gi, data[i].player_age_competition);
@@ -471,19 +690,32 @@
       }
       if (data.player_sex != ""){
         var template = this.searchConditionsTemplate;
+        if (data.player_sex == "전체"){
+          template = template.replace('{{is_single}}', 'd-none d-lg-inline-block');
+        } else {
+          template = template.replace('{{is_single}}', 'd-inline-block');
+        }
         template = template.replace('{{searchCondition}}', data.player_sex);
         view = view + template;
       }
       if (data.player_age != ""){
         var ageArr = common.string_with_square_brakets_to_array(data.player_age);
-        for (var i=0; i<ageArr.length; i++){
+        if (ageArr.length > 1){
+          for (var i=0; i<ageArr.length; i++){
+            var template = this.searchConditionsTemplate;
+            template = template.replace('{{is_single}}', 'd-none d-lg-inline-block');
+            template = template.replace('{{searchCondition}}', ageArr[i] + '세');
+            view = view + template;
+          }
+        } else {
           var template = this.searchConditionsTemplate;
-          template = template.replace('{{searchCondition}}', ageArr[i]);
+          template = template.replace('{{is_single}}', 'd-inline-block');
+          template = template.replace('{{searchCondition}}', ageArr[0] + '세');
           view = view + template;
         }
         var template = this.searchConditionsTemplate;
         if (data.player_age_criteria === "age_criteria_competition"){
-          template = template.replace('{{searchCondition}}', "대회당시");
+          template = template.replace('{{searchCondition}}', "대회당시나이");
         } else {
           template = template.replace('{{searchCondition}}', "현재나이");
         }
@@ -491,32 +723,57 @@
       }
       if (data.style != ""){
         var styleArr = common.string_with_square_brakets_to_array(data.style);
-        for (var i=0; i<styleArr.length; i++){
+        if (styleArr.length > 1){
+          for (var i=0; i<styleArr.length; i++){
+            var template = this.searchConditionsTemplate;
+            template = template.replace('{{is_single}}', 'd-none d-lg-inline-block');
+            template = template.replace('{{searchCondition}}', styleArr[i]);
+            view = view + template;
+          }
+        } else {
           var template = this.searchConditionsTemplate;
-          template = template.replace('{{searchCondition}}', styleArr[i]);
+          template = template.replace('{{is_single}}', 'd-inline-block');
+          template = template.replace('{{searchCondition}}', styleArr[0]);
           view = view + template;
         }
       }
       if (data.distance != ""){
         var distanceArr = common.string_with_square_brakets_to_array(data.distance);
-        for (var i=0; i<distanceArr.length; i++){
+        if (distanceArr.length > 1){
+          for (var i=0; i<distanceArr.length; i++){
+            var template = this.searchConditionsTemplate;
+            template = template.replace('{{is_single}}', 'd-none d-lg-inline-block');
+            template = template.replace('{{searchCondition}}', distanceArr[i]);
+            view = view + template;
+          }
+        } else {
           var template = this.searchConditionsTemplate;
-          template = template.replace('{{searchCondition}}', distanceArr[i]);
+          template = template.replace('{{is_single}}', 'd-inline-block');
+          template = template.replace('{{searchCondition}}', distanceArr[0]);
           view = view + template;
         }
       }
       if (data.player_team != ""){
         var template = this.searchConditionsTemplate;
+        template = template.replace('{{is_single}}', 'd-inline-block');
         template = template.replace('{{searchCondition}}', data.player_team);
         view = view + template;
       }
       if (data.competition_name != ""){
         var template = this.searchConditionsTemplate;
+        template = template.replace('{{is_single}}', 'd-inline-block');
         template = template.replace('{{searchCondition}}', data.competition_name);
         view = view + template;
       }
+
       var template = this.searchConditionsTemplate;
-      template = template.replace('{{searchCondition}}', data.competition_year_from + '~' + data.competition_year_to);
+      template = template.replace('{{is_single}}', 'd-inline-block');
+      template = template.replace('{{searchCondition}}', data.competition_year_from + '부터');
+      view = view + template;
+
+      var template = this.searchConditionsTemplate;
+      template = template.replace('{{is_single}}', 'd-inline-block');
+      template = template.replace('{{searchCondition}}', data.competition_year_to + '까지');
       view = view + template;
     } else {
       template = template.replace('{{searchCondition}}', "전체");
@@ -592,6 +849,69 @@
       view = view + template;
     }
     return view;
+  };
+
+  ResearchTemplate.prototype.get_fieldsOrder = function(conditions){
+    var fieldsOrderMap = new Map();
+    var single_conditions = [];
+    var multi_conditions = [];
+    var number = 0;
+
+    if (conditions.player_name != ""){
+      single_conditions.push("player_name");
+    } else {
+      multi_conditions.push("player_name");
+    }
+
+    if (conditions.player_sex != "전체"){
+      single_conditions.push("player_sex");
+    } else {
+      multi_conditions.push("player_sex");
+    }
+
+    if (conditions.player_age != "" && common.string_with_square_brakets_to_array(conditions.player_age).length == 1){
+      single_conditions.push("player_age");
+    } else {
+      multi_conditions.push("player_age");
+    }
+
+    if (conditions.style != "" && common.string_with_square_brakets_to_array(conditions.style).length == 1){
+      single_conditions.push("style");
+    } else {
+      multi_conditions.push("style");
+    }
+
+    if (conditions.distance != "" && common.string_with_square_brakets_to_array(conditions.distance).length == 1){
+      single_conditions.push("distance");
+    } else {
+      multi_conditions.push("distance");
+    }
+
+    multi_conditions.push("record");
+
+    if (conditions.player_team != ""){
+      single_conditions.push("player_team");
+    } else {
+      multi_conditions.push("player_team");
+    }
+
+    if (conditions.competition_name != ""){
+      single_conditions.push("competition_name");
+    } else {
+      multi_conditions.push("competition_name");
+    }
+
+    multi_conditions.push("competition_date");
+
+    for(var i = 0; i < multi_conditions.length; i++){
+      fieldsOrderMap.set(number++, multi_conditions[i]);
+    }
+
+    for(var i = 0; i < single_conditions.length; i++){
+      fieldsOrderMap.set(number++, single_conditions[i]);
+    }
+
+    return fieldsOrderMap;
   };
 
   common.setNamespace('researchTemplate');

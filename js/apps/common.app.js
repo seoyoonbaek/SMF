@@ -135,6 +135,7 @@ Common.prototype = (function() {
           break;
       }
     },
+    // 토스트 메시지 띄우기
     makeToastMsg: function(string, time) {
       var snackbar_html = '<div id="snackbar">' + string + '</div>';
       document.body.insertAdjacentHTML('beforeend', snackbar_html);

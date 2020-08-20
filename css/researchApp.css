@@ -67,6 +67,43 @@ body {
 }
 
 #mobile_tools_list {
+  display: none;
+  position: absolute;
+  top: 7.5rem;
+  right: 0.5rem;
+  z-index: 1000;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+  color: #333;
+}
+
+#mobile_tools_list .mobile_tool {
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  cursor: pointer;
+  color: black;
+}
+
+#mobile_tools_list .mobile_tool.active, #mobile_tools_list .mobile_tool:hover {
+  background-color: #ccc;
+}
+
+#mobile_tools_list .mobile_tool.click_disabled {
+  color: gray !important;
+}
+
+/*
+#mobile_tools_list {
   color: rgba(255,255,255,0.5);
   border: 1px solid #6c757d;
   background-color: #495057;
@@ -74,7 +111,7 @@ body {
   left: 0;
   right: 0;
   top: 2.5rem;
-  z-index: 1029;
+  z-index: 1030;
 }
 
 #mobile_tools_list .mobile_tool {
@@ -98,7 +135,7 @@ body {
   color: #fff;
   text-decoration: none;
 }
-
+*/
 #searchForm_state_badge {
   display: none;
   float: left;
@@ -330,49 +367,63 @@ main {
   cursor: pointer;
 }
 
+#mobile_select_notes .select_notes {
+    height: 2rem;
+    margin-left: 0.5rem;
+    padding: 0rem;
+}
+
 #note_table_tools .btn, #mobile_note_table_tools .btn {
   background-color: #f2d68a;
   border: 0.1rem solid #ffe496;
   color: black;
   display: none;
 }
-
+/*
 #mobile_note_table_tools .btn {
   margin-top: 0.5rem;
 }
-
+*/
 .result_data_table_active .select_all_records {
   display: inline-block !important;
 }
 
-.note_table_active .select_all_records {
+.result_data_table_active #note_table_tools .save_records_to_note {
   display: inline-block !important;
 }
 
-.result_data_table_active .save_records_to_note {
+.note_table_active #note_table_tools .create_new_note {
   display: inline-block !important;
 }
 
-.note_table_active .create_new_note {
+.note_table_active #note_table_tools .delete_note {
   display: inline-block !important;
 }
 
-.note_table_active .delete_note {
+.note_table_active #note_table_tools .delete_records {
   display: inline-block !important;
 }
 
-.note_table_active .delete_records {
-  display: inline-block !important;
+.mobile_tool {
+  display: block !important;
 }
 
-#searchResult_sort_category, #mobile_searchResult_sort_category {
+#searchResult_sort_category{
   width: 7rem;
   display: inline-block;
 }
 
-#searchResult_sort_order, #mobile_searchResult_sort_order {
+#mobile_searchResult_sort_category {
+  width: 6rem;
+}
+
+#searchResult_sort_order {
   width: 7rem;
   display: inline-block;
+}
+
+#mobile_searchResult_sort_order {
+  width: 6rem;
 }
 
 #table_mode_tabs .nav-item {
@@ -443,10 +494,50 @@ main table thead th {
   display: none !important;
 }
 
+#table_content_wrapper {
+  overflow: hidden;
+}
+
+#mobile_tools_btn {
+  position: absolute;
+  right: 1rem;
+}
+
+#mobile_tools_btn button {
+  display: none !important;
+  border: 1px solid #b8bfc2;
+  padding: 0.2rem !important;
+  font-size: 0.8rem !important;
+}
+
+#mobile_tools_btn button.active {
+  display: inline-block !important;
+}
+
+#mobile_tools_btn button.close_tools {
+  background-color: #b8bfc2;
+  border: 0px !important;
+  color: white;
+  font-weight: bold;
+}
+
+#modals .btn-default {
+  color: #333;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+#modals .btn-default:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
+/*
 #mobile_tools_content {
   display: none;
 }
-
+*/
 #snackbar {
   visibility: hidden;
   background-color: #333;
@@ -456,7 +547,7 @@ main table thead th {
   padding: 16px;
   position: fixed;
   z-index: 1031;
-  bottom: 5rem;
+  bottom: 30%;
   margin-left: 10%;
   margin-right: 10%;
   width: 80%;
@@ -471,21 +562,21 @@ main table thead th {
 /* Animations to fade the snackbar in and out */
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;}
-  to {bottom: 5rem; opacity: 1;}
+  to {bottom: 30%; opacity: 1;}
 }
 
 @keyframes fadein {
   from {bottom: 0; opacity: 0;}
-  to {bottom: 5rem; opacity: 1;}
+  to {bottom: 30%; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-  from {bottom: 5rem; opacity: 1;}
+  from {bottom: 30%; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-  from {bottom: 5rem; opacity: 1;}
+  from {bottom: 30%; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
 
@@ -503,6 +594,77 @@ option:disabled {
 
 @media only screen and (max-width: 992px) {
   body {
+    padding-top: 3rem !important;
+  }
+
+  main {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  .nav-tabs {
+    line-height: 1rem !important;
+  }
+
+  .table td, .table th {
+    padding: .35rem !important;
+  }
+
+  .table th {
+    line-height: 0.5rem !important;
+  }
+
+  .table td {
+    line-height: 1rem !important;
+  }
+
+  table thead th {
+    min-width: 6rem;
+  }
+
+  .table th.table_number, .table th.table_sex, .table th.table_checkbox {
+    min-width: 3rem !important;
+  }
+
+  .table th.table_distance, .table th.table_record {
+    min-width: 5rem !important;
+  }
+
+  tr.data td {
+    position: relative;
+    width: 100%;
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.33%;
+  }
+
+  #table_content_wrapper {
+    overflow-x: scroll !important;
+  }
+
+  #searchForm_tools_button .btn {
+    padding: 0rem 0.4rem 0rem 0.4rem;
+  }
+
+  #searchForm_state_badge .badge {
+    padding: 0.4rem !important;
+  }
+
+  #searchConditions_bar_content {
+    font-size: 10.5pt !important;
+  }
+
+  #searchConditions_bar_content p {
+    margin-right: 0.5rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  #mobile_tools_list.active {
+    display: block !important;
+  }
+}
+/*
+  body {
     padding-top: 5.2rem;
   }
 
@@ -512,7 +674,7 @@ option:disabled {
 
   .modal-container {
     position: fixed;
-    z-index: 1028;
+    z-index: 1029;
     padding-top: 5rem;
     left: 0;
     top: 0;
@@ -723,10 +885,6 @@ option:disabled {
     max-width: 16.66%;
   }
 
-  .nav-item.active {
-    border-bottom: 0rem;
-  }
-
 }
 
 @media only screen and (max-width: 768px) {
@@ -734,13 +892,6 @@ option:disabled {
 }
 
 @media only screen and (max-width: 576px){
-  body {
-    padding-top: 6rem;
-  }
-
-  .modal-container {
-    padding-top: 6rem;
-  }
 
   #mobile_tools_list .mobile_tool {
     padding: 0.3rem !important;
@@ -751,6 +902,31 @@ option:disabled {
     font-size: 0.8rem;
   }
 
+  body {
+    padding-top: 3rem !important;
+  }
+
+  main {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  .table td, .table th {
+    padding: .35rem !important;
+  }
+
+  table thead th {
+    min-width: 6rem;
+  }
+
+  .table th.table_number, .table th.table_sex {
+    min-width: 3rem !important;
+  }
+
+  .table th.table_distance, .table th.table_record {
+    min-width: 5rem !important;
+  }
+
   tr.data td {
     position: relative;
     width: 100%;
@@ -758,20 +934,26 @@ option:disabled {
     flex: 0 0 33.333333%;
     max-width: 33.33%;
   }
-}
 
+  #table_content_wrapper {
+    overflow-x: scroll !important;
+  }
+
+  #searchForm_tools_button .btn {
+    padding: 0rem 0.4rem 0rem 0.4rem;
+  }
+
+}
+*/
 @media only screen and (max-width: 400px) {
+/*
   #mobile_tools_list .mobile_tool span {
     font-size: 0.7rem;
   }
-  /* 모바일에서는 hover 스타일이 좀 방해가 되는 경우가 많음.*/
+  // 모바일에서는 hover 스타일이 좀 방해가 되는 경우가 많음.
+  // 그래서 400px 이하에서는 hover 스타일 없애려고함
   #mobile_tools_list .mobile_tool:hover {
     color: rgba(255, 255, 255, 0.5);
-    text-decoration: none;
-  }
-
-  #mobile_tools_list .mobile_tool.active:hover {
-    color: #fff;
     text-decoration: none;
   }
 
@@ -781,5 +963,36 @@ option:disabled {
 
   #table_mode_tabs .nav-link:hover {
     border-color: #e9ecef #e9ecef #dee2e6 !important;
+  }
+  */
+  .form-control {
+    padding: 0rem !important;
+    height: auto !important;
+  }
+
+  .selectbox select {
+    padding: 0rem !important;
+  }
+
+  .selectbox label {
+    padding: 0rem !important;
+  }
+
+  .checkbox_items, .radio_items {
+    font-size: 0.8rem;
+  }
+
+  #searchForm_competition_name_button {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  #searchForm_team_button {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  tr.initMemo td {
+    text-align: left !important;
   }
 }

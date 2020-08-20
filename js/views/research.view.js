@@ -55,13 +55,27 @@
     this.$note_createNewNoteBtn = document.querySelectorAll('.create_new_note');
     this.$note_deleteRecordsBtn = document.querySelectorAll('.delete_records');
     this.$mobile_tools_list = document.querySelector('#mobile_tools_list');
-    this.$mobile_tools = document.querySelectorAll('#mobile_tools_list .mobile_tool');
+    this.$mobile_tools = document.querySelector('#mobile_tools');
+    this.$mobile_tools_btn = document.querySelector('#mobile_tools_btn');
+    this.$mobile_sort_btn = document.querySelector('#mobile_sort_btn');
+    this.$mobile_setting_btn = document.querySelector('#mobile_setting_btn');
+    this.$close_mobile_tools_btn = document.querySelector('#mobile_tools_btn .close_tools');
+    this.$open_mobile_tools_btn = document.querySelector('#mobile_tools_btn .open_tools');
+    this.$mobile_tools_result_active = document.querySelectorAll('.mobile_tool.result_active');
+    this.$mobile_tools_note_active = document.querySelectorAll('.mobile_tool.note_active');
     this.$mobile_modal_container = document.querySelector('.modal-container');
     this.$mobile_modal_content = document.querySelector('.modal-content');
     this.$mobile_tools_content = document.querySelector('#mobile_tools_content');
     this.$mobile_note_table_tools = document.querySelector('#mobile_note_table_tools');
-    this.$mobile_sort_tools = document.querySelector('#mobile_sort_tools');
-    this.$mobile_setting_tools = document.querySelector('#mobile_setting_tools');
+    this.$modals = document.querySelector('#modals');
+    this.$errorMsg_modal = document.querySelector('#errorMsg_modal');
+    this.$mobile_sort_modal = document.querySelector('#mobile_sort_modal');
+    this.$mobile_setting_modal = document.querySelector('#mobile_setting_modal');
+    this.$mobile_sort_tools = document.querySelector('#mobile_sort_modal .modal-dialog .modal-content .modal-body');
+    this.$mobile_setting_tools = document.querySelector('#mobile_setting_modal .modal-dialog .modal-content .modal-body');
+    this.$modal_backdrop = '<div class="modal-backdrop fade show"></div>';
+    this.$mobile_select_sort = document.querySelector('.mobile_select_sort');
+
     // 전역변수
     this.reset_conditions_btn_click_count = 0;
   }
@@ -131,6 +145,16 @@
           });
         })(i);
       }
+    } else if (event === 'mobile_tools_active_body_click'){
+      var item = document.querySelector('body');
+      item.addEventListener('click', function(event){
+        var target = event.target;
+        if ((target.parentElement.getAttribute('id') != 'mobile_tools_btn') && (target.parentElement.parentElement.getAttribute('id') != 'mobile_tools_btn')){
+          if (!target.classList.contains('mobile_tool_span') && (target.getAttribute('id') != 'mobile_tools_list')){
+            handler(target);
+          }
+        }
+      });
     } else if (event === 'radio_click') {
       var tempArr = document.querySelectorAll('.radio_items');
       for (var i=0; i<tempArr.length; i++){
@@ -210,10 +234,37 @@
       item.addEventListener('click', function(event){
         if (event.target.tagName === 'SPAN'){
           var active_table_mode = event.target.parentElement.getAttribute('id');
+          if (active_table_mode == null){
+            active_table_mode = event.target.parentElement.parentElement.getAttribute('id');
+          }
           handler(active_table_mode);
         }
       });
-    } else if (event === 'mobile_tools_click'){
+    }
+    else if (event === 'mobile_tools_btn_click'){
+      var item = self.$mobile_tools_btn;
+      item.addEventListener('click', function(event){
+        if (event.target.tagName === 'BUTTON') {
+          handler(event.target);
+        } else if (event.target.tagName === 'IMG') {
+          handler(event.target.parentElement);
+        }
+      });
+    }
+    else if (event === 'mobile_sort_btn_click'){
+      var item = self.$mobile_sort_btn;
+      item.addEventListener('click', function(){
+        handler();
+      });
+    }
+    else if (event === 'mobile_setting_btn_click'){
+      var item = self.$mobile_setting_btn;
+      item.addEventListener('click', function(){
+        handler();
+      });
+    }
+    /*
+    else if (event === 'mobile_tools_click'){
       var items = self.$mobile_tools;
       for (var i=0; i<items.length; i++){
         (function(index) {
@@ -223,7 +274,9 @@
           });
         })(i);
       }
-    } else if (event === 'mobile_note_active_btn_checkbox_click'){
+    }
+
+    else if (event === 'mobile_note_active_btn_checkbox_click'){
       var item = self.$mobile_note_table_tools.querySelector('.mobile_note_active_btn');
       item.addEventListener('click', function(event){
         if (event.target.type === 'checkbox'){
@@ -238,7 +291,9 @@
         var mobile_setting_td_category_array = self.$mobile_setting_tools.querySelectorAll('#mobile_setting_td_category input[type=checkbox]:checked');
         handler(mobile_setting_td_line, mobile_setting_td_category_array);
       });
-    } else if (event === 'note_select_all_records_click'){
+    }
+*/
+    else if (event === 'note_select_all_records_click'){
       var items = document.querySelectorAll('.select_all_records');
       for (var i=0; i<items.length; i++){
         (function(i){
@@ -249,10 +304,10 @@
         })(i);
       }
     } else if (event === 'tr_data_click'){
-      var tbody = document.querySelectorAll('table tbody');
-      for (var i=0; i<tbody.length; i++){
+      var tables = document.querySelectorAll('table');
+      for (var i=0; i<tables.length; i++){
         (function(){
-          var item = tbody[i];
+          var item = tables[i];
           item.addEventListener('click', function(event){
             var tagName = event.target.tagName;
             if (tagName === 'TR'){
@@ -354,6 +409,15 @@
       window.addEventListener('beforeunload', function(){
         handler();
       });
+    } else if (event === 'modals_click'){
+      var item = this.$modals;
+      item.addEventListener('click', function(event){
+        var target = event.target;
+        if (target.tagName === 'BUTTON'){
+          var modalID = target.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
+          handler(target, modalID);
+        }
+      });
     }
   };
 
@@ -404,12 +468,17 @@
   };
 
   ResearchView.prototype.setTables = function(data){
-    this.initSearchResultTable();
+    this.initTableFields();
+    this.setSearchResultTable();
     this.initNoteTable(data);
     return true;
   };
 
-  ResearchView.prototype.initSearchResultTable = function(){
+  ResearchView.prototype.initTableFields = function(){
+    this.template.initTableTemplates();
+  };
+
+  ResearchView.prototype.setSearchResultTable = function(){
     this.$searchResult_table.innerHTML = this.template.setResultTable();
   };
 
@@ -423,7 +492,7 @@
     noteData = data[0];
     var settingData = new Object;
     settingData = data[1];
-    this.$mobile_note_table_tools.innerHTML = this.template.setMobileToolNoteTemplate('result_data_table_active', noteData);
+    //this.$mobile_note_table_tools.innerHTML = this.template.setMobileToolNoteTemplate('result_data_table_active', noteData);
     this.$mobile_sort_tools.innerHTML = this.template.setMobileToolSortTemplate();
     this.$mobile_setting_tools.innerHTML = this.template.setMobileToolSettingTemplate();
     this.updateUI_mobile_settingData(settingData);
@@ -501,18 +570,26 @@
     another_select_name = another_select.options[another_select.selectedIndex].text;
     if (select.getAttribute('id') === 'select_year-from'){
       if (select_name > another_select_name) {
-        alert('대회 년도 입력이 잘못되었습니다.');
+        common.makeToastMsg('대회 년도 입력이 잘못되었습니다.', 4000);
         common.siblings(select)[0].innerHTML = another_select_name;
       } else {
         common.siblings(select)[0].innerHTML = select_name;
       }
     } else if (select.getAttribute('id') === 'select_year-to'){
       if (select_name < another_select_name) {
-        alert('대회 년도 입력이 잘못되었습니다.');
+        common.makeToastMsg('대회 년도 입력이 잘못되었습니다.', 4000);
         common.siblings(select)[0].innerHTML = another_select_name;
       } else {
         common.siblings(select)[0].innerHTML = select_name;
       }
+    }
+  };
+
+  ResearchView.prototype.mobile_tools_active_body_click = function(target){
+    if (this.$close_mobile_tools_btn.classList.contains('active')) {
+      this.$close_mobile_tools_btn.classList.remove('active');
+      this.$open_mobile_tools_btn.classList.add('active');
+      this.close_mobile_tools_list();
     }
   };
 
@@ -533,6 +610,10 @@
     }
   };
 
+  ResearchView.prototype.setTableFields = function(data){
+    this.template.setTableTemplates(data);
+  }
+
   ResearchView.prototype.setSearchResultLoading = function() {
     var searchResult_tbody = this.$searchResult_table.querySelector('tbody');
     if (searchResult_tbody.querySelector('tbody .initMemo')) {
@@ -552,7 +633,7 @@
       tbody = this.$note_table.querySelector('tbody');
     }
     if (data.length > 0) {
-      tbody.innerHTML = this.template.setSearchResult(data);
+      tbody.innerHTML = this.template.setSearchResult('searchResult', data);
       this.set_Pagination_by_mode(mode, outputState);
     } else {
       tbody.innerHTML = this.template.noDataErrorMsg_by_mode(mode);
@@ -797,6 +878,12 @@
   ResearchView.prototype.show_researchwindow_btn_click = function(researchConditions, filteringConditions) {
     var currentSearchState = document.querySelector('.current_search_state').innerText;
     var currentTableState = this.get_current_active_table_mode();
+    if (this.$close_mobile_tools_btn.classList.contains('active')){
+      this.$close_mobile_tools_btn.classList.remove('active');
+      this.$open_mobile_tools_btn.classList.add('active');
+      this.close_mobile_tools_list();
+    }
+
     if (currentTableState === 'result_data_table_mode'){
       this.set_researchwindow_display_block();
       this.set_modal_popup_parent_scroll_disabled();
@@ -813,8 +900,18 @@
         this.$searchStateFiltering.classList.remove('current_search_state');
       }
     } else {
-      alert('노트 모드 활성화 동안에는 검색기능을 사용하실 수 없습니다!\n\n검색기능을 사용하시려면 노트 모드를 비활성화해서 검색 결과 모드로 돌아가주세요.');
+      this.$errorMsg_modal.classList.add('show');
+      this.show_modal_backdrop();
     }
+  };
+
+  ResearchView.prototype.show_modal_backdrop = function(){
+    document.body.insertAdjacentHTML('beforeend', this.$modal_backdrop);
+  };
+
+  ResearchView.prototype.close_modals = function(modalID){
+    document.querySelector('.modal-backdrop').remove();
+    document.querySelector('#' + modalID).classList.remove('show');
   };
 
   ResearchView.prototype.hide_researchwindow_btn_click = function(){
@@ -834,8 +931,92 @@
       this.set_note_table_active();
       this.hide_researchwindow_btn_click();
     }
+    this.set_mobile_tools();
   };
 
+  ResearchView.prototype.mobile_tools_btn_click = function(target){
+    if (target.classList.contains('active')){
+      target.classList.remove('active');
+      common.siblings(target)[0].classList.add('active');
+    } else {
+      target.classList.add('active');
+      common.siblings(target)[0].classList.remove('active');
+    }
+
+    var current_active_btn = document.querySelector('#mobile_tools_btn button.active');
+    if (current_active_btn.classList.contains('close_tools')){
+      this.hide_researchwindow_btn_click();
+      this.open_mobile_tools_list();
+    } else {
+      this.close_mobile_tools_list();
+    }
+
+  };
+
+  ResearchView.prototype.open_mobile_tools_list = function(){
+    this.$mobile_tools_list.classList.add('active');
+    this.set_mobile_tools();
+  };
+
+  ResearchView.prototype.set_mobile_tools = function(){
+    var current_table_state = this.get_current_active_table_mode();
+    var result_active_tools = this.$mobile_tools_result_active;
+    var note_active_tools = this.$mobile_tools_note_active;
+    // 결과 탭일 때
+    if (current_table_state === 'result_data_table_mode'){
+      for (var i = 0; i < result_active_tools.length; i++){
+        (function(i){
+          var tool = result_active_tools[i];
+          tool.style['pointer-events'] = 'auto';
+          if (tool.classList.contains('click_disabled')){
+            tool.classList.remove('click_disabled');
+          }
+        })(i);
+      }
+      for (var i = 0; i < note_active_tools.length; i++){
+        (function(i){
+          var tool = note_active_tools[i];
+          tool.style['pointer-events'] = 'none';
+          tool.classList.add('click_disabled');
+        })(i);
+      }
+    }
+    // 노트 탭일 때
+    else {
+      for (var i = 0; i < result_active_tools.length; i++){
+        (function(i){
+          var tool = result_active_tools[i];
+          tool.style['pointer-events'] = 'none';
+          tool.classList.add('click_disabled');
+        })(i);
+      }
+      for (var i = 0; i < note_active_tools.length; i++){
+        (function(i){
+          var tool = note_active_tools[i];
+          tool.style['pointer-events'] = 'auto';
+          if (tool.classList.contains('click_disabled')){
+            tool.classList.remove('click_disabled');
+          }
+        })(i);
+      }
+    }
+  };
+
+  ResearchView.prototype.close_mobile_tools_list = function(){
+    this.$mobile_tools_list.classList.remove('active');
+  };
+
+  ResearchView.prototype.mobile_sort_btn_click = function(){
+    this.$mobile_sort_modal.classList.add('show');
+    this.show_modal_backdrop();
+  };
+
+  ResearchView.prototype.mobile_setting_btn_click = function(){
+    this.$mobile_setting_modal.classList.add('show');
+    this.show_modal_backdrop();
+  };
+
+/*
   ResearchView.prototype.mobile_tools_click = function(target, researchConditions, filteringConditions){
     var clicked_tool = target;
     var clicked_tool_id = clicked_tool.getAttribute('id');
@@ -874,7 +1055,7 @@
       }
     }
   };
-
+*/
   ResearchView.prototype.mobile_note_active_btn_checkbox_click = function(){
     var self = this;
     var prev_active_table_mode = this.get_current_active_table_mode();
@@ -982,8 +1163,6 @@
       var select = select_notes[i];
       select.innerHTML = this.template.set_note_list(data);
       select.value = current_note_title;
-      console.log(current_note_title);
-      console.log(select.value);
     }
   };
 
@@ -1030,9 +1209,11 @@
     this.$note_table.classList.remove('active');
     this.$tableWrapper.classList.remove('note_table_active');
     this.$tableWrapper.classList.add('result_data_table_active');
+    /*
     this.$mobile_note_table_tools.classList.remove('note_table_active');
     this.$mobile_note_table_tools.classList.add('result_data_table_active');
     this.$mobile_note_table_tools.querySelector('.mobile_note_active_btn .switch input[type=checkbox]').checked = false;
+    */
   };
 
   ResearchView.prototype.set_note_table_active = function(){
@@ -1042,9 +1223,11 @@
     this.$note_table.classList.add('active');
     this.$tableWrapper.classList.remove('result_data_table_active');
     this.$tableWrapper.classList.add('note_table_active');
+    /*
     this.$mobile_note_table_tools.classList.add('note_table_active');
     this.$mobile_note_table_tools.classList.remove('result_data_table_active');
     this.$mobile_note_table_tools.querySelector('.mobile_note_active_btn .switch input[type=checkbox]').checked = true;
+    */
   };
 
   ResearchView.prototype.set_researchwindow_display_block = function(){
@@ -1054,19 +1237,12 @@
     this.$searchForm.classList.add('show');
     this.$showResearchWindowButton.classList.remove('show_inline_block');
     this.$hideResearchWindowButton.classList.add('show_inline_block');
-    this.$searchConditionsBar.classList.remove('d-lg-inline-block');
+    this.$searchConditionsBar.classList.remove('d-inline-block');
+    this.$searchConditionsBar.classList.add('d-none');
     this.$searchForm_wrapper.classList.remove('mobile_none');
     this.$searchStateWrapper.classList.add('mobile_show_inline_block');
     this.$resetConditionsButton.classList.add('mobile_show_inline_block');
     this.$researchButton.classList.add('mobile_show_inline_block');
-    this.$mobile_modal_container.classList.remove('mobile_none');
-    if (this.$mobile_tools_list.querySelector('.active')){
-      this.$mobile_tools_list.querySelector('.active').classList.remove('active');
-    }
-    if (this.$mobile_tools_content.querySelector('.active')){
-      this.$mobile_tools_content.querySelector('.active').classList.remove('active');
-    }
-    this.$mobile_tools_list.querySelector('#mobile_researchwindow_btn').classList.add('active');
     this.reset_conditions_btn_click_count = 0;
   };
 
@@ -1083,14 +1259,12 @@
     this.$showResearchWindowButton.classList.add('show_inline_block');
     this.$hideResearchWindowButton.classList.remove('show_inline_block');
     this.$mobile_modal_container.classList.add('mobile_none');
-    this.$searchConditionsBar.classList.add('d-lg-inline-block');
+    this.$searchConditionsBar.classList.remove('d-none');
+    this.$searchConditionsBar.classList.add('d-inline-block');
     this.$searchForm_wrapper.classList.add('mobile_none');
     this.$searchStateWrapper.classList.remove('mobile_show_inline_block');
     this.$resetConditionsButton.classList.remove('mobile_show_inline_block');
     this.$researchButton.classList.remove('mobile_show_inline_block');
-    if (this.$mobile_tools_list.querySelector('.active')){
-      this.$mobile_tools_list.querySelector('.active').classList.remove('active');
-    }
   };
 
   ResearchView.prototype.set_modal_popup_parent_scroll_disabled = function(){
@@ -1175,6 +1349,17 @@
     } else {
       this.$paginationWrapper_note.innerHTML = "";
     }
+  };
+
+  ResearchView.prototype.get_mobile_sort_data = function(){
+    var self = this;
+    var result = new Array();
+    var current_sort_category = document.querySelector('#mobile_searchResult_sort_category .select_label').innerText;
+    var current_sort_order = document.querySelector('#mobile_searchResult_sort_order .select_label').innerText;
+    result.push(current_sort_category);
+    result.push(current_sort_order);
+
+    return result;
   };
 
   common.setNamespace('researchView');
