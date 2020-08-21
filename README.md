@@ -8,7 +8,7 @@ The website for searching records on the Korean Masters Championships with HTML,
 
 ## How to use?
 개발 및 테스트가 끝난 후 베타 서비스를 오픈할 예정입니다.</br>
-아래의 url을 클릭하면 검색 결과 기능을 사용해 볼 수 있습니다. </br>
+현재 아래의 url을 클릭하면 검색 결과 기능을 체험해 보실 수 있습니다. </br>
 http://www.swimforever.net/test/test_jy/mvc_ver/html/research.html
 
 ## Screenshots
@@ -42,9 +42,7 @@ http://www.swimforever.net/test/test_jy/mvc_ver/html/research.html
 </br></br>
 모바일에서의 가독성을 높이기 위해 반응형 웹으로 제작하였습니다.
 </br>
-모바일에서는 검색 결과 기록에 대해서 출력되는 항목의 개수와 종류를 직접 설정할 수 있습니다.
-</br>
-![smf_screenshot_9](./readme_images/smf_screenshot_9.PNG)
+![smf_screenshot_10](./readme_images/smf_screenshot_10.PNG)
 </br></br>
 
 ## Tech/framework used
