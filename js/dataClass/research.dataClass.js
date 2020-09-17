@@ -339,7 +339,7 @@
           return result;
         });
         break;
-      case '나이 그룹':
+      case '나이그룹':
         data.sort(function(a, b){
           var ageFromA = parseInt(a.age_from);
           var ageFromB = parseInt(b.age_from);

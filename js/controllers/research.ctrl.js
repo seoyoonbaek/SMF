@@ -322,27 +322,16 @@
   ResearchController.prototype.mobile_note_active_btn_checkbox_click = function(){
     this.view.mobile_note_active_btn_checkbox_click();
   };
-
+/*
   ResearchController.prototype.mobile_update_settingData_btn_click = function(mobile_setting_td_line, mobile_setting_td_category_array){
     var self = this;
-    var td_line = "2";
-    var td_count = 0;
-    var checked_tdArr = mobile_setting_td_category_array;
-    if (mobile_setting_td_line === 'td_single_line'){
-      td_line = "1";
-    }
-    td_count = parseInt(td_line) * 3;
-    if (checked_tdArr.length == td_count){
       this.model.setSettingData(mobile_setting_td_line, mobile_setting_td_category_array, function(){
         self.model.getSettingData(function(settingData){
           self.view.updateUI_mobile_settingData(settingData);
         });
       });
-    } else {
-      alert('출력 항목을 ' + td_count + '개 선택해주세요.');
-    }
   };
-
+*/
   ResearchController.prototype.note_select_all_records_click = function(target){
     this.view.note_select_all_records_click(target);
   };
@@ -468,6 +457,7 @@
     var self = this;
     this.model.sorting(table_mode, sort_category, sort_order, function(){
       self.view.setSearchResultLoading();
+      self.view.synchronize_sort_data(sort_category, sort_order);
       self.model.set_outputState_by_mode(table_mode, function(){
         self.model.get_nextResult_by_mode(table_mode, function(data){
           self.model.get_outputState_by_mode(table_mode, function(outputState){
@@ -492,7 +482,8 @@
 
     if (target.classList.contains('apply_modal')){
       if (modalID == 'mobile_setting_modal'){
-
+        var setting_data = self.view.get_mobile_setting_data();
+        self.view.updateUI_mobile_settingData(setting_data);
       } else if (modalID == 'mobile_sort_modal'){
         var sort_data = new Array();
         var table_mode = self.view.get_current_active_table_mode();

@@ -49,47 +49,47 @@
       '</tbody>';
     this.initial_tableTemplate = this.tableTemplate;
     this.th_number_template =
-      '<th scope="row" class="table_number">' +
+      '<th scope="row" class="table_number mobile_table_number">' +
         '<div class="th-text">번호</div>' +
        '</th>';
     this.th_pname_template =
-      '<th scope="row" class="table_pname">' +
+      '<th scope="row" class="table_pname mobile_table_pname">' +
         '<div class="th-text">이름</div>' +
       '</th>';
     this.th_sex_template =
-      '<th scope="row" class="table_sex">' +
+      '<th scope="row" class="table_sex mobile_table_sex">' +
         '<div class="th-text">성별</div>' +
       '</th>';
     this.th_age_template =
-      '<th scope="row" class="table_age">' +
-        '<div class="th-text">나이 그룹</div>' +
+      '<th scope="row" class="table_age mobile_table_age">' +
+        '<div class="th-text">나이그룹</div>' +
       '</th>';
     this.th_style_template =
-      '<th scope="row" class="table_style">' +
+      '<th scope="row" class="table_style mobile_table_style">' +
         '<div class="th-text">종목</div>' +
       '</th>';
     this.th_distance_template =
-      '<th scope="row" class="table_distance">' +
+      '<th scope="row" class="table_distance mobile_table_distance">' +
         '<div class="th-text">거리</div>' +
       '</th>';
     this.th_record_template =
-      '<th scope="row" class="table_record">' +
+      '<th scope="row" class="table_record mobile_table_record">' +
         '<div class="th-text">기록</div>' +
       '</th>';
     this.th_team_template =
-      '<th scope="row" class="table_team">' +
+      '<th scope="row" class="table_team mobile_table_team">' +
         '<div class="th-text">소속</div>' +
       '</th>';
     this.th_competition_name_template =
-      '<th scope="row" class="table_competition_name">' +
+      '<th scope="row" class="table_competition_name mobile_table_competition_name">' +
         '<div class="th-text">대회명</div>' +
       '</th>';
     this.th_competitionDate_template =
-      '<th scope="row" class="table_competitionDate">' +
+      '<th scope="row" class="table_competitionDate  mobile_table_competitionDate">' +
         '<div class="th-text">대회일시</div>' +
       '</th>';
     this.th_remark_template =
-      '<th scope="row" class="table_remark">' +
+      '<th scope="row" class="table_remark mobile_table_remark">' +
         '<div class="th-text">비고</div>' +
       '</th>';
     this.th_checkbox_template =
@@ -163,7 +163,7 @@
             '<div class="th-text">성별</div>' +
           '</th>' +
           '<th scope="row" class="table_age">' +
-            '<div class="th-text">나이 그룹</div>' +
+            '<div class="th-text">나이그룹</div>' +
           '</th>' +
           '<th scope="row" class="table_style">' +
             '<div class="th-text">종목</div>' +
@@ -275,34 +275,14 @@
           '</select>' +
         '</div>' +
       '</div>';
+
     this.mobileTool_settingTemplate =
-    /*
-      '<div class="form-group col-12 col-sm-5 p-0">' +
-        '<label class="ml-2 small">출력 형식</label>' +
-        '<div id="mobile_setting_td_line" class="radio_items">' +
-          '<div class="custom-control custom-radio custom-control-inline">' +
-            '<input type="radio" id="td_single_line" class="custom-control-input">' +
-            '<label class="custom-control-label" for="td_single_line">1줄로 보기(3개)</label>' +
-          '</div>' +
-          '<div class="custom-control custom-radio custom-control-inline">' +
-            '<input type="radio" id="td_double_line" class="custom-control-input" checked>' +
-            '<label class="custom-control-label" for="td_double_line">2줄로 보기(6개)</label>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-    */
       '<div class="form-group col-12 col-sm-7 p-0">' +
         '<label class="ml-2 small">출력 항목</label>' +
         '<div class="row checkbox_items mr-0 ml-0" id="mobile_setting_td_category">' +
           '{{categorylist}}' +
         '</div>' +
       '</div>';
-      /*
-      '<div class="w-100">' +
-        '<button type="button" name="button" class="btn btn-warning update_settingData_btn" aria-label="Update settingData">' +
-          '<span>적용</span>' +
-        '</button>' +
-      '</div>';*/
   }
 
   ResearchTemplate.prototype.setMenu = function(data){
@@ -816,12 +796,12 @@
   ResearchTemplate.prototype.setMobileToolSettingTemplate = function(){
     var view = "";
     var template = this.mobileTool_settingTemplate;
-    var categoryArr = ['이름', '성별', '나이', '종목', '거리', '기록', '팀(소속)', '대회일시', '대회장소'];
+    var categoryArr = ['이름', '성별', '나이', '종목', '거리', '기록', '팀(소속)', '대회일시', '대회장소', '비고'];
     var categorylist_template = "";
     for (var i=0; i<categoryArr.length; i++){
       var checkboxItem_template =
         '<div class="col-6 col-sm-4 col-md-3 pr-0 mr-0 custom-control custom-checkbox custom-control-inline">' +
-          '<input class="custom-control-input" id="{{category}}" type="checkbox">' +
+          '<input class="custom-control-input" id="{{category}}" type="checkbox" checked>' +
           '<label class="custom-control-label" for="{{category}}">{{category}}</label>' +
         '</div>';
       checkboxItem_template = checkboxItem_template.replace(/{{category}}/gi, categoryArr[i]);

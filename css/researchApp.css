@@ -423,7 +423,7 @@ main {
 }
 
 #mobile_searchResult_sort_order {
-  width: 6rem;
+  width: 6.5rem;
 }
 
 #table_mode_tabs .nav-item {
@@ -662,6 +662,46 @@ option:disabled {
   #mobile_tools_list.active {
     display: block !important;
   }
+
+  .mobile_table_pname {
+    display: table-cell;
+  }
+
+  .mobile_table_sex {
+    display: table-cell;
+  }
+
+  .mobile_table_age {
+    display: table-cell;
+  }
+
+  .mobile_table_style {
+    display: table-cell;
+  }
+
+  .mobile_table_distance {
+    display: table-cell;
+  }
+
+  .mobile_table_record {
+    display: table-cell;
+  }
+
+  .mobile_table_team {
+    display: table-cell;
+  }
+
+  .mobile_table_competitionDate {
+    display: table-cell;
+  }
+
+  .mobile_table_competition_name {
+    display: table-cell;
+  }
+
+  .mobile_table_remark {
+    display: table-cell;
+  }
 }
 /*
   body {
@@ -836,47 +876,9 @@ option:disabled {
   #mobile_note_table_tools.note_table_active .p_note_open {
     display: inline-block;
   }
+*/
 
-  .mobile_table_pname {
-    display: inline-block;
-  }
-
-  .mobile_table_sex {
-    display: inline-block;
-  }
-
-  .mobile_table_age {
-    display: inline-block;
-  }
-
-  .mobile_table_style {
-    display: inline-block;
-  }
-
-  .mobile_table_distance {
-    display: inline-block;
-  }
-
-  .mobile_table_record {
-    display: inline-block;
-  }
-
-  .mobile_table_team {
-    display: none;
-  }
-
-  .mobile_table_competitionDate {
-    display: none;
-  }
-
-  .mobile_table_competition_name {
-    display: none;
-  }
-
-  .mobile_table_remark {
-    display: none;
-  }
-
+/*
   tr.data td {
     position: relative;
     width: 100%;

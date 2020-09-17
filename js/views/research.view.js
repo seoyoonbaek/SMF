@@ -74,8 +74,6 @@
     this.$mobile_sort_tools = document.querySelector('#mobile_sort_modal .modal-dialog .modal-content .modal-body');
     this.$mobile_setting_tools = document.querySelector('#mobile_setting_modal .modal-dialog .modal-content .modal-body');
     this.$modal_backdrop = '<div class="modal-backdrop fade show"></div>';
-    this.$mobile_select_sort = document.querySelector('.mobile_select_sort');
-
     // 전역변수
     this.reset_conditions_btn_click_count = 0;
   }
@@ -264,27 +262,7 @@
       });
     }
     /*
-    else if (event === 'mobile_tools_click'){
-      var items = self.$mobile_tools;
-      for (var i=0; i<items.length; i++){
-        (function(index) {
-          var item = items[index];
-          item.addEventListener('click', function(){
-            handler(item);
-          });
-        })(i);
-      }
-    }
-
-    else if (event === 'mobile_note_active_btn_checkbox_click'){
-      var item = self.$mobile_note_table_tools.querySelector('.mobile_note_active_btn');
-      item.addEventListener('click', function(event){
-        if (event.target.type === 'checkbox'){
-          var prev_active_table_mode = self.get_current_active_table_mode();
-          handler(prev_active_table_mode);
-        }
-      });
-    } else if (event === 'mobile_update_settingData_btn_click'){
+    else if (event === 'mobile_update_settingData_btn_click'){
       var item = self.$mobile_setting_tools.querySelector('.update_settingData_btn');
       item.addEventListener('click', function(){
         var mobile_setting_td_line = self.$mobile_setting_tools.querySelector('#mobile_setting_td_line input[type=radio]:checked').getAttribute('id');
@@ -393,11 +371,12 @@
             var select = event.target.parentElement;
             var sort_category = "";
             var sort_order = "";
-            if (target.tagName === 'OPTION'){
-              if (select.classList.contains('select_sort_category')){
-                sort_category = target.innerText;
-              } else if (select.classList.contains('select_sort_order')){
-                sort_order = target.innerText;
+            if (target.tagName === 'SELECT'){
+              var label = select.querySelector('label');
+              if (select.getAttribute('id') == 'searchResult_sort_category'){
+                sort_category = label.innerText;
+              } else if (select.getAttribute('id') == 'searchResult_sort_order'){
+                sort_order = label.innerText;
               }
               var table_mode = self.get_current_active_table_mode();
               handler(table_mode, sort_category, sort_order);
@@ -495,7 +474,7 @@
     //this.$mobile_note_table_tools.innerHTML = this.template.setMobileToolNoteTemplate('result_data_table_active', noteData);
     this.$mobile_sort_tools.innerHTML = this.template.setMobileToolSortTemplate();
     this.$mobile_setting_tools.innerHTML = this.template.setMobileToolSettingTemplate();
-    this.updateUI_mobile_settingData(settingData);
+    //this.updateUI_mobile_settingData(settingData);
     return true;
   }
 
@@ -1311,26 +1290,68 @@
     });
   };
 
+  ResearchView.prototype.get_mobile_setting_data = function(){
+    var self = this;
+    var result = new Array();
+    var td_category = document.querySelectorAll('#mobile_setting_td_category input[type=checkbox]');
+    for (var i=0; i < td_category.length; i++){
+      (function(i){
+        var obj = new Object;
+        var category = td_category[i].getAttribute('id');
+        var checked = td_category[i].checked;
+        obj.checked = checked;
+        switch (category) {
+          case '이름':
+            obj.class_name = 'mobile_table_pname';
+            break;
+          case '성별':
+            obj.class_name = 'mobile_table_sex';
+            break;
+          case '나이':
+            obj.class_name = 'mobile_table_age';
+            break;
+          case '종목':
+            obj.class_name = 'mobile_table_style';
+            break;
+          case '거리':
+            obj.class_name = 'mobile_table_distance';
+            break;
+          case '기록':
+            obj.class_name = 'mobile_table_record';
+            break;
+          case '팀(소속)':
+            obj.class_name = 'mobile_table_team';
+            break;
+          case '대회일시':
+            obj.class_name = 'mobile_table_competitionDate';
+            break;
+          case '대회장소':
+            obj.class_name = 'mobile_table_competition_name';
+            break;
+          case '비고':
+            obj.class_name = 'mobile_table_remark';
+            break;
+        }
+        result.push(obj);
+      })(i);
+    }
+    return result;
+  };
+
   ResearchView.prototype.updateUI_mobile_settingData = function(settingData){
     var self = this;
-    var line = settingData.line;
-    var itemArr = settingData.displayedItem;
-    if (line === '1'){
-      self.$mobile_setting_tools.querySelector('#td_single_line').checked = true;
-      self.$mobile_setting_tools.querySelector('#td_double_line').checked = false;
-    } else if (line === '2'){
-      self.$mobile_setting_tools.querySelector('#td_single_line').checked = false;
-      self.$mobile_setting_tools.querySelector('#td_double_line').checked = true;
-    }
-    for (var i=0; i<itemArr.length; i++){
+    for (var i=0; i < settingData.length; i++){
       (function(i){
-        var item = itemArr[i];
-        if (item.style.indexOf('display: none') !== -1){
-          document.getElementById(item.title).checked = false;
+        var data = settingData[i];
+        var display_str = "";
+        if (data.checked == true){
+          display_str = "display: table-cell;";
         } else {
-          document.getElementById(item.title).checked = true;
+          display_str = "display: none;";
         }
-        common.changeCSSRules('researchApp.css', 'only screen and (max-width: 992px)', item.selector, item.style);
+        console.log(data.class_name);
+        console.log(display_str);
+        common.changeCSSRules('researchApp.css', 'only screen and (max-width:992px)', '.' + data.class_name, display_str);
       })(i);
     }
   };
@@ -1360,6 +1381,17 @@
     result.push(current_sort_order);
 
     return result;
+  };
+
+  ResearchView.prototype.synchronize_sort_data = function(sort_category, sort_order){
+    if (sort_category != ""){
+      document.querySelector('#mobile_searchResult_sort_category .select_label').innerText = sort_category;
+      document.querySelector('#searchResult_sort_category .select_label').innerText = sort_category;
+    }
+    if (sort_order != ""){
+      document.querySelector('#mobile_searchResult_sort_order .select_label').innerText = sort_order;
+      document.querySelector('#searchResult_sort_order .select_label').innerText = sort_order;
+    }
   };
 
   common.setNamespace('researchView');
